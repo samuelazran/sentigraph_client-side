@@ -1,9 +1,9 @@
 {
-  "name": "angular-seed",
+  "name": "sentigraph_client-side",
   "private": true,
-  "version": "0.0.0",
-  "description": "A starter project for AngularJS",
-  "repository": "https://github.com/angular/angular-seed",
+  "version": "0.1.0",
+  "description": "social media sentiment analisys web app",
+  "repository": "https://github.com/samuelazran/sentigraph_client-side",
   "license": "MIT",
   "devDependencies": {
     "karma": "~0.10",
