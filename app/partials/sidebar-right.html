@@ -2,18 +2,18 @@
     <div class="scrollable-content">
 
         <div bubble target="rightSidebar" class="settings">
-
+            {{feedDate.start}}
             <div class="settings-heading">
                 <h3 class=""><i class="fa fa-gears"></i> settings</h3>
             </div>
-            {{$rootScope.feedDate.start}}
             <div class="panel feed-date">
                 <div class="panel-heading">
                     <h5 class="panel-title">FEED DATE
                         <small>
                         <span class="same-line">
                             <label class="" for="feedDateFrom">Since: </label>
-                            <input class="" id="feedDateFrom" type="datetime-local" ng-model="feedDate.start" />
+                            <input class="" id="feedDateFrom" type="datetime-local"
+                                   ng-model="feedDate.start" />
                         </span>
                         <span class="same-line">
                             <label class="" for="feedDateTo">Until: </label>

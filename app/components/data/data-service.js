@@ -7,12 +7,13 @@ angular.module('myApp.data.data-service', ['ngResource', 'myApp.data.graph-datum
 
     .service('dataApi', ['$resource', 'graphDatum', '$log', function($resource, graphDatum, $log) {
         //generic resource to retrieve data from the rest api web server
-        var $dataResource = $resource('/api/data/:domain/:source/:datatype', {},
+        var $getDataResource = $resource('/api/data/:domain/:source/:datatype', {},
             {query: {method:'GET', isArray:true}}
         );
+        $getDataResource.cache=true;
         //base method, given resource parameters return promise for array of data items
         this.getData = function (params) {
-            return $dataResource.query({
+            return $getDataResource.query({
                 datatype: params.datatype || "items",
                 source: params.source || "twitter",
                 domain: params.domain || "bitcoin",
@@ -43,5 +44,12 @@ angular.module('myApp.data.data-service', ['ngResource', 'myApp.data.graph-datum
                     $log.error(error);
                 }
             );
-        }
+        };
+
+        var $updateDataResource = $resource('/api/data/', {},
+            {update: {method:'PUT', isArray:false}}
+        );
+        this.updateData = function (editedItem) {
+            return $updateDataResource.update(editedItem).$promise;
+        };
     }]);

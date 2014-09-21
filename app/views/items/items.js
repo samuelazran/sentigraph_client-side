@@ -35,7 +35,12 @@ angular.module('myApp.items', ['ngRoute','myApp.data.data-service'])
 
     $scope.vote = function (item, selectedClass) {
         item.class=selectedClass;
-        item.gold=true;
+        item.gold = true;
+        dataApi.updateData({id:item.id,class:item.class}).then(function (updatedItem) {
+            $log.log(updatedItem);
+        }, function (err) {
+            $log.error(err);
+        });
     };
 
 }]);
