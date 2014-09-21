@@ -1,0 +1,43 @@
+<div class="scrollable">
+    <div class="scrollable-content">
+
+        <div bubble target="rightSidebar" class="settings">
+
+            <div class="settings-heading">
+                <h3 class=""><i class="fa fa-gears"></i> settings</h3>
+            </div>
+            {{$rootScope.feedDate.start}}
+            <div class="panel feed-date">
+                <div class="panel-heading">
+                    <h5 class="panel-title">FEED DATE
+                        <small>
+                        <span class="same-line">
+                            <label class="" for="feedDateFrom">Since: </label>
+                            <input class="" id="feedDateFrom" type="datetime-local" ng-model="feedDate.start" />
+                        </span>
+                        <span class="same-line">
+                            <label class="" for="feedDateTo">Until: </label>
+                            <input class="" id="feedDateTo" type="datetime-local" ng-model="feedDate.end" />
+                        </span>
+                        </small>
+                    </h5>
+                </div>
+                <div class="panel-body">
+
+                    <div class="btn-group justified">
+                        <button class="btn btn-default">Last 24 hr</button>
+                        <button class="btn btn-default">Last 3 days</button>
+                        <button class="btn btn-default">Last week</button>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>

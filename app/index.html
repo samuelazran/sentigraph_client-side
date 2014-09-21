@@ -1,43 +1,99 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7]>      <html ng-app="myApp" ng-controller="MainCtrl" lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html ng-app="myApp" ng-controller="MainCtrl" lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html ng-app="myApp" ng-controller="MainCtrl" lang="en" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html ng-app="myApp" ng-controller="MainCtrl" lang="en" class="no-js"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>sentigraph</title>
+  <meta name="description" content="sentigraph - social media sentiment analisys, graphs and charts ">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<!--
   <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
-  <link rel="stylesheet" href="app.css"/>
   <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
+-->
+
+    <link rel="stylesheet" href="components/mobile-angular-ui/css/mobile-angular-ui-hover.min.css" />
+    <link rel="stylesheet" href="components/mobile-angular-ui/css/mobile-angular-ui-base.min.css" />
+    <link rel="stylesheet" href="components/mobile-angular-ui/css/mobile-angular-ui-desktop.css" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  <link rel="stylesheet" href="app.css" />
 </head>
 <body>
-  <ul class="menu">
-    <li><a href="#/view1">view1</a></li>
-    <li><a href="#/view2">view2</a></li>
-  </ul>
+
+<!-- Sidebars -->
+<div ng-include="'partials/sidebar.html'" class="sidebar sidebar-left" toggleable parent-active-class="sidebar-left-in" id="mainSidebar"></div>
+<div ng-include="'partials/sidebar-right.html'" class="sidebar sidebar-right" toggleable parent-active-class="sidebar-right-in" id="rightSidebar" default="active"></div>
+
+<div class="app">
+
+    <!-- Navbars -->
+    <div class="navbar navbar-app navbar-absolute-top">
+
+        <div class="navbar-brand navbar-brand-center" yield-to="title">
+            <span>Sentigraph {{ 'v%VERSION%' | interpolate }}</span>
+        </div>
+
+        <div class="btn-group pull-left">
+            <div ng-click="toggle('mainSidebar')" class="btn btn-navbar sidebar-toggle">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+
+        <div class="btn-group pull-right" yield-to="navbarAction">
+            <div class="btn btn-navbar" ng-click="toggle('rightSidebar')">
+                <i class="fa fa-gear"></i>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="app-body" >
+        <div class="main" ng-view></div>
+    </div>
+</div>
 
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-  <div ng-view></div>
 
-  <div>Angular seed app: v<span app-version></span></div>
+
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
+
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+
+  <script src="components/mobile-angular-ui/js/mobile-angular-ui.min.js"></script>
+
   <script src="app.js"></script>
-  <script src="view1/view1.js"></script>
-  <script src="view2/view2.js"></script>
+
   <script src="components/version/version.js"></script>
-  <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>
+
+  <script src="components/utils/utils.js"></script>
+  <script src="components/utils/timeago-factory.js"></script>
+  <script src="components/utils/timeago-filter.js"></script>
+
+  <script src="components/data/data.js"></script>
+  <script src="components/data/data-service.js"></script>
+  <script src="components/data/graph-datum-factory.js"></script>
+
+  <script src="components/graph/ng-google-chart.js"></script>
+  <script src="views/graph/graph.js"></script>
+  <script src="views/items/items.js"></script>
 </body>
 </html>

@@ -1,0 +1,51 @@
+<div class="scrollable">
+    <div class="panel scrollable-content">
+        <div class="panel-heading">
+            <h2 class="panel-title">popular from {{dataParams.source}} about {{dataParams.domain}}</h2>
+        </div>
+        <div>
+            <div class="panel-body container-fluid">
+                <!-- Content -->
+
+                <div class="row-fluid items">
+                    <div class="panel col-xs-12 col-sm-12 col-md-6 col-lg-4 item" ng-repeat="item in data"
+                         ng-class="{positive: item.class==1, negative: item.class==-1, informative: item.class==0}">
+                        <div class="panel-heading">
+
+                            <span id="vote{{item.id}}"  toggle="off"  target="vote{{item.id}}" toggleable  active-class="visible" class="vote btn-group-sm btn-group-vertical">
+                                <button class="btn btn-default" ng-click="vote(item, 1)">
+                                    <i class="fa fa-lg fa-arrow-circle-up positive-icon"></i>
+                                </button>
+                                <button class="btn btn-default" ng-click="vote(item, 0)">
+                                    <i class="fa fa-lg fa-info-circle informative-icon"></i>
+                                </button>
+                                <button class="btn btn-default" ng-click="vote(item, -1)">
+                                    <i class="fa fa-lg fa-arrow-circle-down negative-icon"></i>
+                                </button>
+                            </span>
+
+                            <button toggle="on" target="vote{{item.id}}" class="selected-class btn btn-default btn-sm">
+                                <i class="fa fa-lg" ng-class="{
+                                    'fa-arrow-circle-o-up positive-icon': !item.gold && item.class==1,
+                                    'fa-arrow-circle-up positive-icon': item.gold && item.class==1,
+                                    'fa-arrow-circle-o-down negative-icon': !item.gold && item.class==-1,
+                                    'fa-arrow-circle-down negative-icon': item.gold && item.class==-1,
+                                    'fa-info-o-circle informative-icon': !item.gold && item.class==0,
+                                    'fa-info-circle informative-icon': item.gold && item.class==0
+                                }"></i>
+                            </button>
+                            <ul class="list-unstyled list-inline meta-data">
+                                <li></li>
+                                <li ng-bind="item.class==1 ? 'positive' : item.class==-1 ? 'negative' : 'informative' "></li>
+                                <li ng-bind="item.created_time | timeago"></li>
+                            </ul>
+                        </div>
+                        <div class="panel-body">
+                            <div class="text" ng-bind="item.text"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

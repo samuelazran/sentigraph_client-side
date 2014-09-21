@@ -1,30 +1,135 @@
 /* app css stylesheet */
+.btn:focus,.btn:active {
+    outline: none;
+}
+html, body, .main {
+/*    margin:0; padding:0;
+    height:100%;*/
+}
+.main {
 
-.menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
+}
+.same-line {
+    white-space: nowrap;
+    display: inline-block;
+}
+.app.has-navbar-top .scrollable {
+    height: calc(100% - 51px);
+    top: 51px;
+}
+.app-name {
+    display: inline-block;
+    top:-10px;
+}
+.app-name small {
+    top: -22px;
+    position: relative;
+    display: block;
+}
+.settings-heading h3 {
+    color:#999999;
+    text-align: center;
+    padding:10px;
+}
+.feed-date .panel-title small {
+    position: relative; left:30px;
+}
+.feed-date input {
+    border:none; line-height: normal; width: 130px; font-size: inherit;
+}
+.feed-date label {
+    font-weight: inherit;
+}
+.feed-date .btn-group.justified .btn {
+    width:33.3333%;
 }
 
-.menu:before {
-  content: "[";
+.items>.item {
+    overflow-wrap: break-word;
+    overflow: hidden;
+}
+.items>.item:after {
+    height: 15px;
+    width: 100% ;
+    background-color: #c0c0c0;
+}
+.items>.item .list-inline{
+    display: inline-block;
+}
+.items>.item .meta-data {
+    color:#999;
+}
+.items>.item.positive {
+    border-color: green;
+}
+.items>.item .positive-icon:before {
+    color:green;
+}
+.items>.item.negative {
+    border-color: red;
+}
+.items>.item .negative-icon:before {
+    color:red;
+}
+.items>.item.informative {
+    border-color: gray;
+}
+.items>.item .informative-icon:before {
+    color:gray;
+}
+.item .vote {
+    background-color: rgba(250,245,240,0.6);
+    position: absolute;
+    display: none;
+    box-shadow: 2px -2px 3px #ccd;
+    border-radius: 4px;
+}
+.item .vote.visible {
+    display: initial;
+}
+.item .vote .btn {
+
+}
+.item .btn.selected-class {
+}
+.item .btn.selected-class:focus {
+
+}
+/* xs - extra small */
+@media (max-width: 767px) {
+    .items>.item {
+        height: auto;
+    }
+}
+/* sm - small */
+@media (min-width: 768px) and (max-width: 991px) {
+    .items>.item {
+        height: auto;
+    }
+}
+/* md - medium */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .items>.item {
+        height: 160px;
+    }
+}
+/* lg - large */
+@media (min-width: 1200px) and (max-width: 1500px) {
+    .items>.item {
+        height: 175px;
+    }
 }
 
-.menu:after {
-  content: "]";
+/* xlg - xlarge */
+@media (min-width: 1501px) and (max-width: 2000px) {
+    .items>.item {
+        height: 150px;
+    }
 }
 
-.menu > li {
-  display: inline;
-}
-
-.menu > li:before {
-  content: "|";
-  padding-right: 0.3em;
-}
-
-.menu > li:nth-child(1):before {
-  content: "";
-  padding: 0;
+/* xxlg - xxlarge */
+@media (min-width: 2000px) {
+    .items>.item {
+        height: 160px;
+    }
 }

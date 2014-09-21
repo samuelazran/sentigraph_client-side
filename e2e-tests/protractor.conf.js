@@ -6,7 +6,10 @@ exports.config = {
   ],
 
   capabilities: {
-    'browserName': 'chrome'
+    'browserName': 'chrome',
+      'chromeOptions': {
+          args: ['--test-type']
+      }
   },
 
   baseUrl: 'http://localhost:8000/app/',
