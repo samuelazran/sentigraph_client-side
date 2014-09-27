@@ -17,8 +17,8 @@ angular.module('myApp.data.data-service', ['ngResource', 'myApp.data.graph-datum
                 datatype: params.datatype || "items",
                 source: params.source || "twitter",
                 domain: params.domain || "bitcoin",
-                start_time: params.start_time || "2014-1-01 00:00",
-                end_time: params.end_time || "2015-1-01 00:00"
+                start_time: params.feedDateTimeRange.start,
+                end_time: params.feedDateTimeRange.end
             }).$promise;
         };
         //graph method, given resource parameters return graph data array
@@ -27,8 +27,7 @@ angular.module('myApp.data.data-service', ['ngResource', 'myApp.data.graph-datum
                 datatype: params.datatype || "graph",
                 source: params.source || "twitter",
                 domain: params.domain || "bitcoin",
-                start_time: params.start_time || "2014-1-01 00:00",
-                end_time: params.end_time || "2015-1-01 00:00"
+                feedDateTimeRange: params.feedDateTimeRange
             }).then(
                 //success
                 function( dataArray ){

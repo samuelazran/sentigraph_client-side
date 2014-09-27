@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.items', ['ngRoute','myApp.data.data-service'])
+angular.module('myApp.items', ['ngRoute','myApp.data'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/items', {
@@ -9,7 +9,7 @@ angular.module('myApp.items', ['ngRoute','myApp.data.data-service'])
   });
 }])
 
-.controller('ItemsCtrl', ['$scope','dataApi','$log', function($scope, dataApi, $log) {
+.controller('ItemsCtrl', ['$scope','dataApi','dataSettings','$log', function($scope, dataApi, dataSettings, $log) {
 
     //the data items
     $scope.data = [];
@@ -23,15 +23,18 @@ angular.module('myApp.items', ['ngRoute','myApp.data.data-service'])
         });
     };
 
-    var params = {};
+    $scope.feedDateTimeRange=dataSettings.feedDateTimeRange;
+
     $scope.dataParams = {
-        source: params.source || "twitter",
-        domain: params.domain || "bitcoin",
-        start_time: params.start_time || "2014-1-01 00:00",
-        end_time: params.end_time || "2015-1-01 00:00"
+        source: "twitter",
+        domain: "bitcoin",
+        feedDateTimeRange: $scope.feedDateTimeRange
     };
 
-    $scope.getData($scope.dataParams);
+    $scope.$watch('feedDateTimeRange', function(newVal, oldVal) {
+        $scope.getData($scope.dataParams);
+    },true);
+
 
     $scope.vote = function (item, selectedClass) {
         item.class=selectedClass;

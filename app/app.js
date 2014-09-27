@@ -4,36 +4,45 @@
 angular.module('myApp', [
   'ngRoute',
   'mobile-angular-ui',
+  'myApp.data.data-settings-factory',
   'myApp.graph',
   'myApp.items',
   'myApp.utils',
   'myApp.version'
 ]).
 
-config(['$routeProvider', function($routeProvider) {
-  $routeProvider.otherwise({redirectTo: '/items'});
-}]).
+    config(['$routeProvider', function($routeProvider) {
+      $routeProvider.otherwise({redirectTo: '/'});
+    }]).
 
-controller('MainCtrl', ['$scope', '$location', '$rootScope', function($scope, $location, $rootScope) {
-    $scope.isActive = function(route) {
-        return route === $location.path();
-    };
-    var last24hr = {
-        start: new Date(),
-        end: new Date(new Date().setDate(new Date().getDate()-1))
-    };
-    var last3days = {
-        start: new Date(),
-        end: new Date(new Date().setDate(new Date().getDate()-3))
-    };
-    var last5days = {
-        start: new Date(),
-        end: new Date(new Date().setDate(new Date().getDate()-5))
-    };
-    var lastweek = {
-        start: new Date(),
-        end: new Date(new Date().setDate(new Date().getDate()-7))
-    };
-    $rootScope.feedDate = lastweek;
-    console.log($rootScope.feedDate);
-}]);
+    controller('MainCtrl', ['$scope', '$location', function($scope, $location) {
+
+        $scope.isActive = function(route) {
+            return route === $location.path();
+        };
+
+    }]).
+
+    controller('SettingsCtrl', ['$scope', 'dataSettings', function($scope, dataSettings) {
+
+        //set date time range from now to daysFromNow before
+        $scope.setFeedDateTimeRangeRelativeToNow = function (daysFromNow) {
+            dataSettings.feedDateTimeRange.toRelativeRange(daysFromNow);
+            $scope.feedDateTimeRangeRelativeToNow = daysFromNow;
+        };
+
+        $scope.feedDateTimeRange = dataSettings.feedDateTimeRange;
+        //default feed date time range
+        $scope.feedDateTimeRangeRelativeToNow = 7;
+
+/*        console.log($scope.feedDate==dataSettings.itemsDateTimeRange);
+        $scope.$watch('feedDate.end', function() {
+            console.log("$scope.feedDate",$scope.feedDate);
+            console.log("dataSettings.itemsDateTimeRange",dataSettings.itemsDateTimeRange);
+            console.log($scope.feedDate==dataSettings.itemsDateTimeRange);
+        });*/
+
+        $scope.setFeedDateTimeRangeRelativeToNow($scope.feedDateTimeRangeRelativeToNow);
+
+    }])
+;

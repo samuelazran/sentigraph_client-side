@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myApp.graph', ['ngRoute','googlechart',
-    'myApp.data.data-service'])
+    'myApp.data'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/graph', {
@@ -18,8 +18,8 @@ angular.module('myApp.graph', ['ngRoute','googlechart',
     }
 })
 
-.controller('GraphCtrl', ['$scope','dataApi','$log',
-        function($scope, dataApi, $log) {
+.controller('GraphCtrl', ['$scope','dataApi','dataSettings','$log',
+        function($scope, dataApi, dataSettings, $log) {
 
     $scope.getData = function (params) {
         dataApi.getGraphData(params).then(function (dataList) {
@@ -29,15 +29,18 @@ angular.module('myApp.graph', ['ngRoute','googlechart',
             $log.error(err);
         });
     };
-    var params = {};
-    $scope.dataParams = {
-        source: params.source || "twitter",
-        domain: params.domain || "bitcoin",
-        start_time: params.start_time || "2014-1-01 00:00",
-        end_time: params.end_time || "2015-1-01 00:00"
-    };
 
-    $scope.getData($scope.dataParams);
+    $scope.feedDateTimeRange = dataSettings.feedDateTimeRange;
+
+    $scope.dataParams = {
+        source: "twitter",
+        domain: "bitcoin",
+        feedDateTimeRange: $scope.feedDateTimeRange
+    };
+    $scope.$watch('feedDateTimeRange', function(newVal, oldVal) {
+        $scope.getData($scope.dataParams);
+    },true);
+
 
     $scope.chartObject = {};
 
@@ -49,7 +52,7 @@ angular.module('myApp.graph', ['ngRoute','googlechart',
     $scope.chartObject.type = "AreaChart";
 
     $scope.chartObject.options = {
-        'title': 'What People Feel About Bitcoin',
+        'title': 'Sentiment Graph of ' + $scope.dataParams.domain + ' on ' + $scope.dataParams.source,
         "isStacked": "true",
         "fill": 20,
         "displayExactValues": true,

@@ -26,7 +26,7 @@ html, body, .main {
     position: relative;
     display: block;
 }
-.settings-heading h3 {
+.settings-heading * {
     color:#999999;
     text-align: center;
     padding:10px;
@@ -47,6 +47,7 @@ html, body, .main {
 .items>.item {
     overflow-wrap: break-word;
     overflow: hidden;
+    border-color:#ddd;
 }
 .items>.item:after {
     height: 15px;
@@ -58,39 +59,30 @@ html, body, .main {
 }
 .items>.item .meta-data {
     color:#999;
+    position: relative;
+    top: 7px;
 }
-.items>.item.positive {
-    border-color: green;
-}
-.items>.item .positive-icon:before {
-    color:green;
-}
-.items>.item.negative {
-    border-color: red;
-}
-.items>.item .negative-icon:before {
-    color:red;
-}
-.items>.item.informative {
-    border-color: gray;
-}
-.items>.item .informative-icon:before {
-    color:gray;
+.select-class {
+    right: -14px;
+    position: relative;
 }
 .item .vote {
     background-color: rgba(250,245,240,0.6);
     position: absolute;
-    display: none;
     box-shadow: 2px -2px 3px #ccd;
     border-radius: 4px;
+    display: none;
 }
-.item .vote.visible {
+.item .select-class.open .vote {
     display: initial;
 }
 .item .vote .btn {
-
+    width:40px;
+    height: 36px;
 }
 .item .btn.selected-class {
+    width:40px;
+    height: 36px;
 }
 .item .btn.selected-class:focus {
 

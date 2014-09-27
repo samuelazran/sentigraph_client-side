@@ -1,41 +1,83 @@
-<div class="scrollable">
+<div class="scrollable" ng-controller="SettingsCtrl">
     <div class="scrollable-content">
 
         <div bubble target="rightSidebar" class="settings">
-            {{feedDate.start}}
+
             <div class="settings-heading">
-                <h3 class=""><i class="fa fa-gears"></i> settings</h3>
+                <h2 class=""><i class="fa fa-gears"></i> settings</h2>
             </div>
-            <div class="panel feed-date">
-                <div class="panel-heading">
-                    <h5 class="panel-title">FEED DATE
-                        <small>
-                        <span class="same-line">
-                            <label class="" for="feedDateFrom">Since: </label>
-                            <input class="" id="feedDateFrom" type="datetime-local"
-                                   ng-model="feedDate.start" />
-                        </span>
-                        <span class="same-line">
-                            <label class="" for="feedDateTo">Until: </label>
-                            <input class="" id="feedDateTo" type="datetime-local" ng-model="feedDate.end" />
-                        </span>
-                        </small>
-                    </h5>
+
+
+            <div class="list-group feed-date">
+
+                <div class="list-group-item">
+                    <h3 class="">feed</h3>
                 </div>
-                <div class="panel-body">
+                <div class="list-group-item">
+
+                    <div class="same-line">
+                        <label class="" toggle target="domainDropdown">domain: </label>
+                        <div class="btn-group pull-right toggleable-dropdown" active-class="open" id="domainDropdown" toggleable>
+                            <button type="button"
+                                    class="btn btn-default dropdown-toggle" toggle
+                                    target="domainDropdown">
+                                <i class="fa fa-bitcoin"></i> Bitcoin <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" toggle="off" bubble target="domainDropdown">
+                                <li><a href><i class="fa fa-bitcoin"></i> Bitcoin</a></li>
+                                <li class="divider"></li>
+                                <li>more coming soon</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="same-line">
+                        <label class="" toggle target="sourceDropdown">source: </label>
+                        <div class="btn-group pull-right toggleable-dropdown" active-class="open" id="sourceDropdown" toggleable>
+                            <button type="button"
+                                    class="btn btn-default dropdown-toggle" toggle
+                                    target="sourceDropdown">
+                                <i class="fa fa-twitter"></i> Twitter <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" toggle="off" bubble target="sourceDropdown">
+                                <li><a href><i class="fa fa-twitter"></i> Twitter</a></li>
+                                <li class="divider"></li>
+                                <li>more coming soon</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="container">
+                        <span class="same-line">
+                            <label class="" for="feedDateStart">since: </label>
+                            <input class="" id="feedDateStart" type="date"
+                                   ng-model="feedDateTimeRange.start" />
+                        </span>
+                        <span class="same-line">
+                            <label class="" for="feedDateEnd">until: </label>
+                            <input class="" id="feedDateEnd" type="date"
+                                   ng-model="feedDateTimeRange.end" />
+                        </span>
+                    </div>
 
                     <div class="btn-group justified">
-                        <button class="btn btn-default">Last 24 hr</button>
-                        <button class="btn btn-default">Last 3 days</button>
-                        <button class="btn btn-default">Last week</button>
+                        <button ng-click="setFeedDateTimeRangeRelativeToNow(1)"
+                                ng-class="{active:feedDateTimeRangeRelativeToNow==1}"
+                                class="btn btn-default">Last 24 hr</button>
+                        <button ng-click="setFeedDateTimeRangeRelativeToNow(3)"
+                                ng-class="{active:feedDateTimeRangeRelativeToNow==3}"
+                                class="focus btn btn-default">Last 3 days</button>
+                        <button ng-click="setFeedDateTimeRangeRelativeToNow(7)"
+                                ng-class="{active:feedDateTimeRangeRelativeToNow==7}"
+                                class="btn btn-default">Last week</button>
                     </div>
 
 
 
                 </div>
+
             </div>
-
-
 
 
         </div>
