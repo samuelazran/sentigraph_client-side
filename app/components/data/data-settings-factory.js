@@ -45,8 +45,8 @@
             var now = new Date();
             var before = new Date(new Date().setDate(now.getDate()-daysFromNow));
             //modify this DateTimeRange object to
-            this.start = now;
-            this.end = before;
+            this.start = before;
+            this.end = now;
         };
 
         var feedDateTimeRange = new DateTimeRange();
