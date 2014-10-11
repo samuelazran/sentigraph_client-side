@@ -3,36 +3,49 @@
  */
 'use strict';
 
-angular.module('myApp.data.data-service', ['ngResource', 'myApp.data.graph-datum-factory'])
+angular.module('myApp.data.data-service', ['ngResource', 'myApp.data.graph-datum-factory', 'myApp.data.data-settings-factory'])
 
-    .service('dataApi', ['$resource', 'graphDatum', '$log', function($resource, graphDatum, $log) {
-        //generic resource to retrieve data from the rest api web server
-        var $getDataResource = $resource('/api/data/:domain/:source/:datatype', {},
-            {query: {method:'GET', isArray:true}}
+    .service('dataApi', ['$resource', 'graphDatum', 'dataSettings', '$log', function($resource, graphDatum, dataSettings, $log) {
+        //given dictionary of parameters return query object with filters for get request
+        function paramsToQuery(params) {
+            var query = {q:{filters:[]}};
+            for (var p in params) {
+                if (params.hasOwnProperty(p)) {
+                    //special treatment:
+                    if (params[p] instanceof dataSettings.BaseRange) {
+                        query.q.filters.push(dataSettings.FilterFactory(p,">=", params[p].start));
+                        query.q.filters.push(dataSettings.FilterFactory(p,"<=", params[p].end));
+                    } else {
+                        query.q.filters.push(dataSettings.FilterFactory(p,"==", params[p]));
+                    }
+                }
+            }
+            return query;
+        }
+        //resource data from the rest api web server
+        var $dataResource = $resource('/api/data/:id', {},
+            {query: {method:'GET'}, update: {method:'PATCH', params: { id: "@id" }}}
         );
-        $getDataResource.cache=true;
-        //base method, given resource parameters return promise for array of data items
-        this.getData = function (params) {
-            return $getDataResource.query({
-                datatype: params.datatype || "items",
-                source: params.source || "twitter",
-                domain: params.domain || "bitcoin",
-                start_time: params.feedDateTimeRange.start,
-                end_time: params.feedDateTimeRange.end
-            }).$promise;
+        this.updateData = function (editedItemId, editedItem) {
+            return $dataResource.update({id:editedItemId}, editedItem).$promise;
         };
-        //graph method, given resource parameters return graph data array
+        $dataResource.cache=true;
+        //given resource parameters return promise for data
+        this.getData = function (params) {
+            return $dataResource.query(paramsToQuery(params)).$promise;
+        };
+
+        //resource graph data from the rest api web server
+        var $graphDataResource = $resource('/api/graph_data', {},
+            {query: {method:'GET'}}
+        );
+        //graph method, given resource parameters return graph data
         this.getGraphData = function (params) {
-            return this.getData({
-                datatype: params.datatype || "graph",
-                source: params.source || "twitter",
-                domain: params.domain || "bitcoin",
-                feedDateTimeRange: params.feedDateTimeRange
-            }).then(
+            return $graphDataResource.query(paramsToQuery(params)).$promise.then(
                 //success
-                function( dataArray ){
+                function(data){
                     var graphDataArray = [];
-                    angular.forEach(dataArray, function (item) {
+                    angular.forEach(data.objects, function (item) {
                         item = new graphDatum.DailyGraphDatum(item).toGoogleChartRow();
                         graphDataArray.push(item);
                     });
@@ -43,12 +56,5 @@ angular.module('myApp.data.data-service', ['ngResource', 'myApp.data.graph-datum
                     $log.error(error);
                 }
             );
-        };
-
-        var $updateDataResource = $resource('/api/data/', {},
-            {update: {method:'PUT', isArray:false}}
-        );
-        this.updateData = function (editedItem) {
-            return $updateDataResource.update(editedItem).$promise;
         };
     }]);

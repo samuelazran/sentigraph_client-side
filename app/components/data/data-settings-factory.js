@@ -8,35 +8,57 @@
 (function () {
 
     function dataSettingsFactory() {
-
-        function DateTimeRange (startDateTime,endDateTime) {
+        // base class for every Range class
+        //used for checking if current object is Range
+        function BaseRange (start, end) {
             //hold the values
-            this._startDateTime = null;
-            this._endDateTime = null;
-            //init the values
-            if (startDateTime && endDateTime) {
-                this.start = startDateTime;
-                this.end = endDateTime;
+            this._start = undefined;
+            this._end = undefined;
+            //init the values via the setters defined later
+            if (start && end) {
+                this.start = start;
+                this.end = end;
             }
         }
+        Object.defineProperty(BaseRange.prototype, "start", {
+            get: function () {
+                return this._start;
+            },
+            set: function (val) {
+                this._start = val;
+            }
+        });
+        Object.defineProperty(BaseRange.prototype, "end", {
+            get: function () {
+                return this._end;
+            },
+            set: function (val) {
+                this._end = val;
+            }
+        });
+
+        //inherit from the super class: BaseRange and use the super class constructor
+        function DateTimeRange () {  }
+        DateTimeRange.prototype = Object.create(BaseRange.prototype);
+        //overide super class getters and setters to ensure date is valid
         Object.defineProperty(DateTimeRange.prototype, "start", {
             get: function () {
-                return this._startDateTime;
+                return this._start;
             },
             set: function (val) {
                 //ensure it is Date and it is valid date
                 if (!(val instanceof Date) || Object.prototype.toString.call(val) !== "[object Date]") throw new Error("startDateTime must be valid a Date");
-                this._startDateTime = val;
+                this._start = val;
             }
         });
         Object.defineProperty(DateTimeRange.prototype, "end", {
             get: function () {
-                return this._endDateTime;
+                return this._end;
             },
             set: function (val) {
                 //ensure it is Date and it is valid date
                 if (!(val instanceof Date) || Object.prototype.toString.call(val) !== "[object Date]") throw new Error("endDateTime must be valid a Date");
-                this._endDateTime = val;
+                this._end = val;
             }
         });
 
@@ -49,11 +71,20 @@
             this.end = now;
         };
 
+
         var feedDateTimeRange = new DateTimeRange();
 
+        function FilterFactory(name, op, val) {
+            return {
+                name: name, op: op, val: val
+            };
+        }
+
         return {
+            BaseRange: BaseRange,
             DateTimeRange: DateTimeRange,
-            feedDateTimeRange: feedDateTimeRange
+            feedDateTimeRange: feedDateTimeRange,
+            FilterFactory: FilterFactory
         };
     }
 

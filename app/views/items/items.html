@@ -9,11 +9,11 @@
 
                 <div class="row-fluid items">
                     <div class="panel col-xs-12 col-sm-12 col-md-6 col-lg-4 item" ng-repeat="item in data"
-                         ng-class="{positive: item.class==1, negative: item.class==-1, informative: item.class==0}">
+                         ng-class="{positive: item.class_value==1, negative: item.class_value==-1, informative: item.class_value==0}">
                         <div class="panel-heading">
 
                             <div class="pull-left meta-data">
-                                <span ng-bind="item.created_time | timeago"></span>
+                                <span ng-bind="item.created_at | timeago"></span>
                             </div>
 
                             <div class="pull-right toggleable-dropdown select-class" active-class="open" id="vote{{item.id}}" toggleable>
@@ -36,19 +36,19 @@
                                         class="btn btn-default btn-sm dropdown-toggle selected-class" toggle
                                         target="vote{{item.id}}">
                                     <i class="fa" ng-class="{
-                                        'fa-arrow-up text-success': !item.gold && item.class==1,
-                                        'fa-lg fa-arrow-circle-up text-success': item.gold && item.class==1,
-                                        'fa-arrow-down text-danger': !item.gold && item.class==-1,
-                                        'fa-lg fa-arrow-circle-down text-danger': item.gold && item.class==-1,
-                                        'fa-info text-muted': !item.gold && item.class==0,
-                                        'fa-lg fa-info-circle text-muted': item.gold && item.class==0
+                                        'fa-arrow-up text-success': !item.gold && item.class_value==1,
+                                        'fa-lg fa-arrow-circle-up text-success': item.gold && item.class_value==1,
+                                        'fa-arrow-down text-danger': !item.gold && item.class_value==-1,
+                                        'fa-lg fa-arrow-circle-down text-danger': item.gold && item.class_value==-1,
+                                        'fa-info text-muted': !item.gold && item.class_value==0,
+                                        'fa-lg fa-info-circle text-muted': item.gold && item.class_value==0
                                     }"></i>
                                 </button>
 
                             </div>
 
                             <div class="pull-right meta-data">
-                                <span ng-bind="item.class==1 ? 'positive' : item.class==-1 ? 'negative' : 'informative' "></span>
+                                <span ng-bind="item.class_value==1 ? 'positive' : item.class_value==-1 ? 'negative' : 'informative' "></span>
                             </div>
 
                             <div class="clearfix"></div>

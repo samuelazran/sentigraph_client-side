@@ -1,5 +1,6 @@
 'use strict';
 
+
 angular.module('myApp.items', ['ngRoute','myApp.data'])
 
 .config(['$routeProvider', function($routeProvider) {
@@ -15,9 +16,9 @@ angular.module('myApp.items', ['ngRoute','myApp.data'])
     $scope.data = [];
 
     $scope.getData = function (params) {
-        dataApi.getData(params).then(function (dataList) {
-            $log.log(dataList);
-            $scope.data = dataList;
+        dataApi.getData(params).then(function (data) {
+            $log.log(data);
+            $scope.data = data.objects;
         }, function (err) {
             $log.error(err);
         });
@@ -26,9 +27,10 @@ angular.module('myApp.items', ['ngRoute','myApp.data'])
     $scope.feedDateTimeRange=dataSettings.feedDateTimeRange;
 
     $scope.dataParams = {
+        language: "en",
         source: "twitter",
         domain: "bitcoin",
-        feedDateTimeRange: $scope.feedDateTimeRange
+        created_at: $scope.feedDateTimeRange
     };
 
     $scope.$watch('feedDateTimeRange', function(newVal, oldVal) {
@@ -37,9 +39,9 @@ angular.module('myApp.items', ['ngRoute','myApp.data'])
 
 
     $scope.vote = function (item, selectedClass) {
-        item.class=selectedClass;
+        item.class_value=selectedClass;
         item.gold = true;
-        dataApi.updateData({id:item.id,class:item.class}).then(function (updatedItem) {
+        dataApi.updateData(item.id, {class_value:item.class_value}).then(function (updatedItem) {
             $log.log(updatedItem);
         }, function (err) {
             $log.error(err);
