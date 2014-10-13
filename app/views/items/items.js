@@ -30,7 +30,8 @@ angular.module('myApp.items', ['ngRoute','myApp.data'])
         language: "en",
         source: "twitter",
         domain: "bitcoin",
-        created_at: $scope.feedDateTimeRange
+        created_at: $scope.feedDateTimeRange,
+        DESC_ORDER_BY: "created_at"
     };
 
     $scope.$watch('feedDateTimeRange', function(newVal, oldVal) {

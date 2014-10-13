@@ -35,7 +35,8 @@ angular.module('myApp.graph', ['ngRoute','googlechart',
     $scope.dataParams = {
         source: "twitter",
         domain: "bitcoin",
-        feedDateTimeRange: $scope.feedDateTimeRange
+        datetime: $scope.feedDateTimeRange,
+        ASC_ORDER_BY: "datetime"
     };
     $scope.$watch('feedDateTimeRange', function(newVal, oldVal) {
         $scope.getData($scope.dataParams);

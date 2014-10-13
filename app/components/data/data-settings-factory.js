@@ -74,9 +74,31 @@
 
         var feedDateTimeRange = new DateTimeRange();
 
+        //String left pad method
+        String.prototype.lpad = function(padString, length) {
+            var str = this;
+            while (str.length < length)
+                str = padString + str;
+            return str;
+        }
+        //modify the method in prototype of Date to support the date format for the the rest api server
+        Date.prototype.toJSON = function () {
+            return '' + this.getUTCFullYear().toString() + '-' +
+            (this.getUTCMonth() + 1).toString().lpad(0,2) + '-' +
+            this.getUTCDate().toString().lpad(0,2) + ' ' +
+            this.getUTCHours().toString().lpad(0,2) + ':' +
+            this.getUTCMinutes().toString().lpad(0,2);
+        }
+        //create filter object for the rest api query
         function FilterFactory(name, op, val) {
             return {
                 name: name, op: op, val: val
+            };
+        }
+        //create filter object for the rest api query
+        function OrderFactory(field, direction) {
+            return {
+                field: field, direction: direction
             };
         }
 
@@ -84,7 +106,8 @@
             BaseRange: BaseRange,
             DateTimeRange: DateTimeRange,
             feedDateTimeRange: feedDateTimeRange,
-            FilterFactory: FilterFactory
+            FilterFactory: FilterFactory,
+            OrderFactory: OrderFactory
         };
     }
 

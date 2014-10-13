@@ -4,6 +4,7 @@
 angular.module('myApp', [
   'ngRoute',
   'mobile-angular-ui',
+  'angular-loading-bar',
   'myApp.data.data-settings-factory',
   'myApp.graph',
   'myApp.items',
