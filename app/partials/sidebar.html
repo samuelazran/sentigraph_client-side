@@ -1,14 +1,14 @@
-<h1 class="app-name">Sentigraph {{ 'v%VERSION%' | interpolate }}
-    <small>social media sentiment analysis</small>
+<h1 class="app-name"><i class="fa fa-lg fa-line-chart"></i>Senti<span>graph</span> <small class="app-ver">{{ 'v%VERSION%' | interpolate }}</small>
+    <small class="app-desc">Social Media Sentiment Analysis</small>
 </h1>
 
 <div class="scrollable">
     <div class="scrollable-content">
         <div class="list-group" toggle="off" bubble target="mainSidebar">
             <a ng-class="{active:isActive('/')}" class="list-group-item disabled" href="#/"><i class="fa fa-home"></i> Home <i class="fa fa-chevron-right pull-right"></i></a>
-            <a ng-class="{active:isActive('/items')}" class="list-group-item" href="#/items"><i class="fa fa-twitter"></i> Tweets <i class="fa fa-chevron-right pull-right"></i></a>
-            <a ng-class="{active:isActive('/graph')}" class="list-group-item" href="#/graph"><i class="fa fa-bar-chart-o"></i> Charts <i class="fa fa-chevron-right pull-right"></i></a>
-            <a ng-class="{active:isActive('/overview')}" class="list-group-item disabled" href="#/overview"><i class="fa fa-image"></i> Overview <i class="fa fa-chevron-right pull-right"></i></a>
+            <a ng-class="{active:isActive('/items')}" class="list-group-item" href="#/items"><i class="fa fa-twitter"></i> Sentiment Feed <i class="fa fa-chevron-right pull-right"></i></a>
+            <a ng-class="{active:isActive('/graph')}" class="list-group-item" href="#/graph"><i class="fa fa-bar-chart-o"></i> Sentiment Graph <i class="fa fa-chevron-right pull-right"></i></a>
+            <a ng-class="{active:isActive('/overview')}" class="list-group-item disabled" href="#/overview"><i class="fa fa-image"></i> Overview & FAQ <i class="fa fa-chevron-right pull-right"></i></a>
             <a ng-class="{active:isActive('/feedback')}" class="list-group-item disabled" href="#/feedback"><i class="fa fa-send"></i> Feedback <i class="fa fa-chevron-right pull-right"></i></a>
             <a ng-class="{active:isActive('/about')}" class="list-group-item disabled" href="#/about"><i class="fa fa-user"></i> About <i class="fa fa-chevron-right pull-right"></i></a>
         </div>

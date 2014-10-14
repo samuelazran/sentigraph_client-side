@@ -4,4 +4,4 @@ angular.module('myApp.version', [
   'myApp.version.interpolate-filter'
 ])
 
-.value('version', '0.1');
+.value('version', '0.1 beta');

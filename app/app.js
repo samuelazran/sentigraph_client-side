@@ -12,8 +12,9 @@ angular.module('myApp', [
   'myApp.version'
 ]).
 
-    config(['$routeProvider', function($routeProvider) {
+    config(['$routeProvider', 'cfpLoadingBarProvider', function($routeProvider, loadingBar) {
       $routeProvider.otherwise({redirectTo: '/'});
+      loadingBar.includeSpinner=false;
     }]).
 
     controller('MainCtrl', ['$scope', '$location', function($scope, $location) {
