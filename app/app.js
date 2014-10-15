@@ -1,18 +1,36 @@
 'use strict';
+require('angular');
+require('angular-route');
+require('./bower_components/angular-resource/angular-resource.js');
+require('./bower_components/angular-loading-bar/build/loading-bar.js');
+require('./bower_components/mobile-angular-ui/dist/js/mobile-angular-ui.js');
+require('./bower_components/lrInfiniteScroll/lrInfiniteScroll.js');
+require('./components/data/data.js');
+require('./components/data/data-service.js');
+require('./components/data/data-settings-factory.js');
+require('./components/data/graph-datum-factory.js');
+require('./components/graph/ng-google-chart.js');
+require('./components/utils/utils.js');
+require('./components/utils/timeago-factory.js');
+require('./components/utils/timeago-filter.js');
+require('./components/version/version.js');
+require('./components/version/interpolate-filter.js');
+require('./views/graph/graph.js');
+require('./views/items/items.js');
+
 
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
-  'ngRoute',
-  'mobile-angular-ui',
-  'angular-loading-bar',
-  'myApp.data.data-settings-factory',
-  'myApp.graph',
-  'myApp.items',
-  'myApp.utils',
-  'myApp.version'
-]).
-
-    config(['$routeProvider', 'cfpLoadingBarProvider', function($routeProvider, loadingBar) {
+    'ngRoute',
+    'mobile-angular-ui',
+    'angular-loading-bar',
+    'myApp.data.data-settings-factory',
+    'myApp.graph',
+    'myApp.items',
+    'myApp.utils',
+    'myApp.version'
+])
+    .config(['$routeProvider', 'cfpLoadingBarProvider', function($routeProvider, loadingBar) {
       $routeProvider.otherwise({redirectTo: '/'});
       loadingBar.includeSpinner=false;
     }]).
@@ -36,13 +54,6 @@ angular.module('myApp', [
         $scope.feedDateTimeRange = dataSettings.feedDateTimeRange;
         //default feed date time range
         $scope.feedDateTimeRangeRelativeToNow = 7;
-
-/*        console.log($scope.feedDate==dataSettings.itemsDateTimeRange);
-        $scope.$watch('feedDate.end', function() {
-            console.log("$scope.feedDate",$scope.feedDate);
-            console.log("dataSettings.itemsDateTimeRange",dataSettings.itemsDateTimeRange);
-            console.log($scope.feedDate==dataSettings.itemsDateTimeRange);
-        });*/
 
         $scope.setFeedDateTimeRangeRelativeToNow($scope.feedDateTimeRangeRelativeToNow);
 

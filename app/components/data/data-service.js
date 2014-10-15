@@ -25,6 +25,13 @@ angular.module('myApp.data.data-service', ['ngResource', 'myApp.data.graph-datum
                         }
                         query.q['order_by'].push(dataSettings.OrderFactory(params[p],direction));
                     }
+                    //special treatment for PAGE keyword:
+                    else if (p==="PAGE") {
+                        if (!query.q['order_by']) {
+                            query.q['page']=null;
+                        }
+                        query.q['page']=params[p];
+                    }
                     else {
                         query.q.filters.push(dataSettings.FilterFactory(p,"==", params[p]));
                     }
