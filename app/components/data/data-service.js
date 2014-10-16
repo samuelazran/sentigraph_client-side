@@ -35,6 +35,7 @@ angular.module('myApp.data.data-service', ['ngResource', 'myApp.data.graph-datum
                         }
                         query['page']=params[p];
                     }
+
                     else {
                         query.q.filters.push(dataSettings.FilterFactory(p,"==", params[p]));
                     }
