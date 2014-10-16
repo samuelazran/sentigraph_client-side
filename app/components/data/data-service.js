@@ -12,19 +12,22 @@ angular.module('myApp.data.data-service', ['ngResource', 'myApp.data.graph-datum
             var query = {q:{filters:[]}};
             for (var p in params) {
                 if (params.hasOwnProperty(p)) {
+
                     //special treatment for Range:
                     if (params[p] instanceof dataSettings.BaseRange) {
                         query.q.filters.push(dataSettings.FilterFactory(p,">=", params[p].start));
                         query.q.filters.push(dataSettings.FilterFactory(p,"<=", params[p].end));
                     }
+
                     //special treatment for ASC_ORDER_BY and DESC_ORDER_BY keywords:
                     else if (p==="ASC_ORDER_BY" || p==="DESC_ORDER_BY") {
                         var direction = (p==="ASC_ORDER_BY") ? "asc" : "desc";
-                        if (!query['order_by']) {
-                            query['order_by']=[];
+                        if (!query.q['order_by']) {
+                            query.q['order_by']=[];
                         }
-                        query['order_by'].push(dataSettings.OrderFactory(params[p],direction));
+                        query.q['order_by'].push(dataSettings.OrderFactory(params[p],direction));
                     }
+
                     //special treatment for PAGE keyword:
                     else if (p==="PAGE") {
                         if (!query['page']) {
