@@ -6,8 +6,15 @@ html, body, .main {
 /*    margin:0; padding:0;
     height:100%;*/
 }
-.main {
-
+a:hover {
+    outline: 0;
+    color: #007aff;
+    text-decoration: underline;
+}
+a {
+    text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    color: #0055b3;
 }
 .same-line {
     white-space: nowrap;
@@ -32,38 +39,64 @@ html, body, .main {
     color: inherit;
     opacity: 0.66;
 }
-.app-name .app-desc {
-    top: -22px;
-    position: relative;
-    display: none;
+
+/* Standard syntax */
+@keyframes rotation {
+    from {transform: rotate(0deg)}
+    to {transform: rotate(135deg)}
+}
+/* Chrome, Safari, Opera */
+@-webkit-keyframes rotation {
+    from {transform: rotate(0deg)}
+    to {transform: rotate(360deg)}
+}
+i.fa.fa-spinner {
+    -webkit-animation: rotation 2.0s infinite ease-in-out;
+    -webkit-animation: rotation 2.0s infinite ease-in-out;
+}
+.loading {
+    text-align: center;
+    padding: 2px;
     color: #007aff;
-    /* opacity: 0.8; */
-    width: 220px;
-    text-shadow: none;
-    background-color: #f5f5f5;
+    top:-12px;
+    position: relative;
+    text-shadow: 1px 1px 1px #eee;
 }
 .settings-heading * {
     color:#999999;
     text-align: center;
-    padding:10px;
+    padding:10px 10px 5px 10px;
+    margin:0;
 }
-.feed-date .panel-title small {
+.feed-settings .panel-title small {
     position: relative; left:30px;
 }
-.feed-date input {
-    border:none; line-height: normal; width: 130px; font-size: inherit;
+.feed-settings input, .feed-settings button {
+    text-align: left;
+    padding: 6px; border:none; line-height: normal;
+    width: auto; font-size: inherit;
+    height:30px;
 }
-.feed-date label {
+.feed-settings label {
     font-weight: inherit;
+    padding: 6px; margin:0;
+    text-align: left;height:30px;
 }
-.feed-date .btn-group.justified .btn {
+.feed-settings .btn-group.justified .btn {
     width:33.3333%;
 }
 
 .items>.item {
     overflow-wrap: break-word;
-    overflow: hidden;
+    padding:1px;
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+.item>.panel {
     border-color:#ddd;
+    height: 100%;
+    overflow: hidden;
+    margin:0;
 }
 .items>.item:after {
     height: 15px;
@@ -73,14 +106,18 @@ html, body, .main {
 .items>.item .list-inline{
     display: inline-block;
 }
+.items>.item>.panel>.panel-heading {
+    padding: 1px;
+}
 .items>.item .meta-data {
     color:#999;
-    position: relative;
-    top: 7px;
 }
-.select-class {
-    right: -14px;
-    position: relative;
+.user-image {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 48px;
+    width:50px;
+    height:50px;
 }
 .item .vote {
     background-color: rgba(250,245,240,0.6);
@@ -97,47 +134,22 @@ html, body, .main {
     height: 36px;
 }
 .item .btn.selected-class {
-    width:40px;
-    height: 36px;
+    width:50px;
+    height: 50px;
+    border-color: #E6E6E7;
 }
 .item .btn.selected-class:focus {
 
 }
-/* xs - extra small */
-@media (max-width: 767px) {
-    .items>.item {
-        height: auto;
-    }
-}
-/* sm - small */
-@media (min-width: 768px) and (max-width: 991px) {
-    .items>.item {
-        height: auto;
-    }
-}
-/* md - medium */
-@media (min-width: 992px) and (max-width: 1199px) {
-    .items>.item {
-        height: 160px;
-    }
-}
-/* lg - large */
-@media (min-width: 1200px) and (max-width: 1500px) {
-    .items>.item {
-        height: 175px;
-    }
+.class-name {
+    position: relative;
+    top: 13px;
+    right:4px;
 }
 
-/* xlg - xlarge */
-@media (min-width: 1501px) and (max-width: 2000px) {
-    .items>.item {
-        height: 150px;
-    }
+.item .panel-body.text {
+    padding: 15px;
 }
-
-/* xxlg - xxlarge */
-@media (min-width: 2000px) {
-    .items>.item {
-        height: 160px;
-    }
+.item .text {
+    font-size: 16px;
 }

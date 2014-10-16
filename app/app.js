@@ -1,9 +1,10 @@
 'use strict';
-require('angular');
-require('angular-route');
-require('./bower_components/angular-resource/angular-resource.js');
-require('./bower_components/angular-loading-bar/build/loading-bar.js');
-require('./bower_components/mobile-angular-ui/dist/js/mobile-angular-ui.js');
+require('./bower_components/angular/angular.min.js');
+require('./bower_components/angular-route/angular-route.min.js');
+require('./bower_components/angular-resource/angular-resource.min.js');
+require('./bower_components/angular-sanitize/angular-sanitize.min.js');
+require('./bower_components/angular-loading-bar/build/loading-bar.min.js');
+require('./bower_components/mobile-angular-ui/dist/js/mobile-angular-ui.min.js');
 require('./bower_components/lrInfiniteScroll/lrInfiniteScroll.js');
 require('./components/data/data.js');
 require('./components/data/data-service.js');
@@ -22,6 +23,7 @@ require('./views/items/items.js');
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
     'ngRoute',
+    'ngSanitize',
     'mobile-angular-ui',
     'angular-loading-bar',
     'myApp.data.data-settings-factory',
@@ -31,7 +33,7 @@ angular.module('myApp', [
     'myApp.version'
 ])
     .config(['$routeProvider', 'cfpLoadingBarProvider', function($routeProvider, loadingBar) {
-      $routeProvider.otherwise({redirectTo: '/'});
+      $routeProvider.otherwise({redirectTo: '/items'});
       loadingBar.includeSpinner=false;
     }]).
 

@@ -4,15 +4,14 @@
         <div bubble target="rightSidebar" class="settings">
 
             <div class="settings-heading">
-                <h2 class=""><i class="fa fa-gears"></i> settings</h2>
+                <h3 class=""><i class="fa fa-gears"></i> Settings</h3>
             </div>
 
-
-            <div class="list-group feed-date">
-
-                <div class="list-group-item">
-                    <h3 class="">feed</h3>
+            <div class="list-group feed-settings">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Feed</h4>
                 </div>
+
                 <div class="list-group-item">
 
                     <div class="same-line">
@@ -26,7 +25,7 @@
                             <ul class="dropdown-menu" role="menu" toggle="off" bubble target="domainDropdown">
                                 <li><a href><i class="fa fa-bitcoin"></i> Bitcoin</a></li>
                                 <li class="divider"></li>
-                                <li>more coming soon</li>
+                                <li><a href>more coming soon</a></li>
                             </ul>
                         </div>
                     </div>
@@ -42,13 +41,17 @@
                             <ul class="dropdown-menu" role="menu" toggle="off" bubble target="sourceDropdown">
                                 <li><a href><i class="fa fa-twitter"></i> Twitter</a></li>
                                 <li class="divider"></li>
-                                <li>more coming soon</li>
+                                <li><a href>more coming soon</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
+
+                <div class="panel-heading">
+                    <h4 class="panel-title">Date</h4>
+                </div>
                 <div class="list-group-item">
-                    <div class="container">
+                    <div>
                         <span class="same-line">
                             <label class="" for="feedDateStart">since: </label>
                             <input class="" id="feedDateStart" type="date"
@@ -60,20 +63,18 @@
                                    ng-model="feedDateTimeRange.end" />
                         </span>
                     </div>
-
+                    <br />
                     <div class="btn-group justified">
-                        <button ng-click="setFeedDateTimeRangeRelativeToNow(1)"
+                        <span ng-click="setFeedDateTimeRangeRelativeToNow(1)"
                                 ng-class="{active:feedDateTimeRangeRelativeToNow==1}"
-                                class="btn btn-default">Last 24 hr</button>
-                        <button ng-click="setFeedDateTimeRangeRelativeToNow(3)"
+                                class="btn btn-default">Last 24 hr</span>
+                        <span ng-click="setFeedDateTimeRangeRelativeToNow(3)"
                                 ng-class="{active:feedDateTimeRangeRelativeToNow==3}"
-                                class="focus btn btn-default">Last 3 days</button>
-                        <button ng-click="setFeedDateTimeRangeRelativeToNow(7)"
+                                class="focus btn btn-default">Last 3 days</span>
+                        <span ng-click="setFeedDateTimeRangeRelativeToNow(7)"
                                 ng-class="{active:feedDateTimeRangeRelativeToNow==7}"
-                                class="btn btn-default">Last week</button>
+                                class="btn btn-default">Last week</span>
                     </div>
-
-
 
                 </div>
 

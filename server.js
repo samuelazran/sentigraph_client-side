@@ -429,6 +429,14 @@ var regurls = {
     "/api/data/188": patchData
 };
 
+function sleep(time, callback) {
+    var stop = new Date().getTime();
+    while(new Date().getTime() < stop + time) {
+        ;
+    }
+    callback();
+}
+
 //var root = path.join(__dirname, 'fixtures', 'root');
 var before = function (req, res) {
 	var regurlfunc = regurls[req.url] || regurls[req.url.split("?")[0]];
@@ -439,6 +447,8 @@ var before = function (req, res) {
     } else {
 		console.info("serving api request");
 		res.writeHead(200, { 'Content-Type': 'application/json' });
+        console.log("going to sleep for 1 seconds to simulate loading time");
+        sleep(1000, function () {console.log("waking up :)")});
 		res.end(JSON.stringify(regurlfunc));
 	}
 };

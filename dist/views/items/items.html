@@ -1,5 +1,5 @@
 <div class="scrollable">
-    <div class="panel scrollable-content" lr-infinite-scroll="paging" scroll-threshold="200" time-threshold="400">
+    <div class="panel scrollable-content" lr-infinite-scroll="paging" scroll-threshold="300" time-threshold="200">
         <div class="panel-heading">
             <h2 class="panel-title">popular from {{dataParams.source}} about {{dataParams.domain}}</h2>
         </div>
@@ -8,56 +8,67 @@
                 <!-- Content -->
 
                 <div class="row-fluid items">
-                    <div class="panel col-xs-12 col-sm-12 col-md-6 col-lg-4 item" ng-repeat="item in data"
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 item" ng-repeat="item in data"
                          ng-class="{positive: item.class_value==1, negative: item.class_value==-1, informative: item.class_value==0}">
-                        <div class="panel-heading">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <div class="pull-left meta-data">
+                                    <a ng-show="item.user" href="https://twitter.com/{{item.user.screen_name}}" target="_blank">
+                                        <span type="button"
+                                                style="background-image: url({{item.user.profile_image_url}});"
+                                                class="btn btn-default btn-sm user-image"></span>
+                                        <span ng-bind="item.user.name"></span>
+                                    </a>
+                                    <span ng-bind="item.created_at | timeago"></span>
+                                </div>
 
-                            <div class="pull-left meta-data">
-                                <span ng-bind="item.created_at | timeago"></span>
+                                <div class="pull-right toggleable-dropdown select-class" active-class="open" id="vote{{item.id}}" toggleable>
+
+                                    <span class="btn-group-sm btn-group-vertical vote" role="menu" toggle="off" bubble target="vote{{item.id}}">
+
+                                            <button class="btn btn-default" ng-click="vote(item, 1)">
+                                                <i class="fa fa-lg fa-arrow-circle-up text-success"></i>
+                                            </button>
+                                            <button class="btn btn-default" ng-click="vote(item, 0)">
+                                                <i class="fa fa-lg fa-info-circle text-muted"></i>
+                                            </button>
+
+                                            <button class="btn btn-default" ng-click="vote(item, -1)">
+                                                <i class="fa fa-lg fa-arrow-circle-down text-danger"></i>
+                                            </button>
+                                    </span>
+
+                                    <button type="button"
+                                            class="btn btn-default dropdown-toggle selected-class" toggle
+                                            target="vote{{item.id}}">
+                                        <i class="fa" ng-class="{
+                                            'fa-arrow-up text-success': !item.gold && item.class_value==1,
+                                            'fa-lg fa-arrow-circle-up text-success': item.gold && item.class_value==1,
+                                            'fa-arrow-down text-danger': !item.gold && item.class_value==-1,
+                                            'fa-lg fa-arrow-circle-down text-danger': item.gold && item.class_value==-1,
+                                            'fa-info text-muted': !item.gold && item.class_value==0,
+                                            'fa-lg fa-info-circle text-muted': item.gold && item.class_value==0
+                                        }"></i>
+                                    </button>
+
+                                </div>
+
+                                <div class="pull-right meta-data class-name">
+                                    <span ng-bind="item.class_value==1 ? 'positive' : item.class_value==-1 ? 'negative' : 'informative' "></span>
+                                </div>
+
+                                <div class="clearfix"></div>
                             </div>
-
-                            <div class="pull-right toggleable-dropdown select-class" active-class="open" id="vote{{item.id}}" toggleable>
-
-                                <span class="btn-group-sm btn-group-vertical vote" role="menu" toggle="off" bubble target="vote{{item.id}}">
-
-                                        <button class="btn btn-default" ng-click="vote(item, 1)">
-                                            <i class="fa fa-lg fa-arrow-circle-up text-success"></i>
-                                        </button>
-                                        <button class="btn btn-default" ng-click="vote(item, 0)">
-                                            <i class="fa fa-lg fa-info-circle text-muted"></i>
-                                        </button>
-
-                                        <button class="btn btn-default" ng-click="vote(item, -1)">
-                                            <i class="fa fa-lg fa-arrow-circle-down text-danger"></i>
-                                        </button>
-                                </span>
-
-                                <button type="button"
-                                        class="btn btn-default btn-sm dropdown-toggle selected-class" toggle
-                                        target="vote{{item.id}}">
-                                    <i class="fa" ng-class="{
-                                        'fa-arrow-up text-success': !item.gold && item.class_value==1,
-                                        'fa-lg fa-arrow-circle-up text-success': item.gold && item.class_value==1,
-                                        'fa-arrow-down text-danger': !item.gold && item.class_value==-1,
-                                        'fa-lg fa-arrow-circle-down text-danger': item.gold && item.class_value==-1,
-                                        'fa-info text-muted': !item.gold && item.class_value==0,
-                                        'fa-lg fa-info-circle text-muted': item.gold && item.class_value==0
-                                    }"></i>
-                                </button>
-
+                            <div class="panel-body text">
+                                <div class="text" ng-bind-html="item.text | linky"></div>
                             </div>
-
-                            <div class="pull-right meta-data">
-                                <span ng-bind="item.class_value==1 ? 'positive' : item.class_value==-1 ? 'negative' : 'informative' "></span>
-                            </div>
-
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="panel-body">
-                            <div class="text" ng-bind="item.text"></div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="loading" ng-show="loading">
+                <i class="fa fa-spinner"></i>
+                loading...
             </div>
         </div>
     </div>
