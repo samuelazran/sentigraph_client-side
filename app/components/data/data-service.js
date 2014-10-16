@@ -20,23 +20,24 @@ angular.module('myApp.data.data-service', ['ngResource', 'myApp.data.graph-datum
                     //special treatment for ASC_ORDER_BY and DESC_ORDER_BY keywords:
                     else if (p==="ASC_ORDER_BY" || p==="DESC_ORDER_BY") {
                         var direction = (p==="ASC_ORDER_BY") ? "asc" : "desc";
-                        if (!query.q['order_by']) {
-                            query.q['order_by']=[];
+                        if (!query['order_by']) {
+                            query['order_by']=[];
                         }
-                        query.q['order_by'].push(dataSettings.OrderFactory(params[p],direction));
+                        query['order_by'].push(dataSettings.OrderFactory(params[p],direction));
                     }
                     //special treatment for PAGE keyword:
                     else if (p==="PAGE") {
-                        if (!query.q['order_by']) {
-                            query.q['page']=null;
+                        if (!query['page']) {
+                            query['page']=null;
                         }
-                        query.q['page']=params[p];
+                        query['page']=params[p];
                     }
                     else {
                         query.q.filters.push(dataSettings.FilterFactory(p,"==", params[p]));
                     }
                 }
             }
+            $log.log(query);
             return query;
         }
 
