@@ -4,7 +4,7 @@ require('./bower_components/angular-route/angular-route.min.js');
 require('./bower_components/angular-resource/angular-resource.min.js');
 require('./bower_components/angular-sanitize/angular-sanitize.min.js');
 require('./bower_components/angular-loading-bar/build/loading-bar.min.js');
-require('./bower_components/mobile-angular-ui/dist/js/mobile-angular-ui.min.js');
+require('./bower_components/mobile-angular-ui/dist/js/mobile-angular-ui.js');
 require('./bower_components/lrInfiniteScroll/lrInfiniteScroll.js');
 require('./components/data/data.js');
 require('./components/data/data-service.js');
