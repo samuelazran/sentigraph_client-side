@@ -10,7 +10,7 @@ angular.module('myApp.items', ['ngRoute','myApp.data','lrInfiniteScroll'])
   });
 }])
 
-.controller('ItemsCtrl', ['$scope','dataApi','dataSettings','$log', function($scope, dataApi, dataSettings, $log) {
+.controller('ItemsCtrl', ['$scope','$timeout','dataApi','dataSettings','$log', function($scope, $timeout, dataApi, dataSettings, $log) {
 
     //the data items and filters params
     $scope.data = [];
@@ -25,19 +25,28 @@ angular.module('myApp.items', ['ngRoute','myApp.data','lrInfiniteScroll'])
     };
 
     $scope.totalPages = 0;
+    var getDataTimeoutPromise;
     $scope.getData = function (params) {
         $scope.loading=true;
-        dataApi.getData(params).then(function (data) {
-            $log.log(data);
-            $scope.totalPages = data.total_pages;
-            //append the new data to the end of the data array
-            //works only for small arrays N < 150000
-            $scope.data.push.apply($scope.data, data.objects);
-        }, function (err) {
-            $log.error(err);
-        }).finally(function () {
-            $scope.loading=false;
-        });
+        //in case there was request in the last 100 ms cancel it
+        $timeout.cancel(getDataTimeoutPromise);
+        //get promise to get data in 100 ms
+        getDataTimeoutPromise=$timeout(function () {
+            dataApi.getData(params).then(function (data) {
+                $log.log(data);
+                $scope.totalPages = data.total_pages;
+                if (data.page===1) {
+                    $scope.data = [];
+                }
+                //append the new data to the end of the data array
+                //works only for small arrays N < 150000
+                $scope.data.push.apply($scope.data, data.objects);
+            }, function (err) {
+                $log.error(err);
+            }).finally(function () {
+                $scope.loading=false;
+            });
+        },100);
     };
 
     $scope.paging = function () {
@@ -48,7 +57,12 @@ angular.module('myApp.items', ['ngRoute','myApp.data','lrInfiniteScroll'])
     };
 
     //$watch $scope.dataParams deeply for changes
-    $scope.$watch('dataParams', function(newValues, oldValues, scope) {
+    $scope.$watch("dataParams", function(newValues, oldValues, scope) {
+        //if page number didn't changed, than must be other param changed
+        if (newValues.PAGE===oldValues.PAGE) {
+            //init page number
+            newValues.PAGE=1;
+        }
         scope.getData(scope.dataParams);
     },true);
 

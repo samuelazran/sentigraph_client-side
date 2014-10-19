@@ -1,0 +1,100 @@
+// app css stylesheet
+
+//---------------------------------------------------------------
+//  COMMON
+//---------------------------------------------------------------
+
+//links
+a
+  text-decoration none
+  color: #0055b3
+
+a:hover
+  outline 0
+  color 007aff
+  text-decoration underline
+
+//buttons
+.btn:focus, .btn:active
+  outline: none
+
+//force element in this container stay in the same line
+.same-line
+  white-space nowrap
+  display inline-block
+
+//make sure the main scrollable element is full height
+.app.has-navbar-top .app-body>.main>.full-height
+  height calc(100% - 51px)
+  top 51px
+
+//spinner for loading items
+@keyframes rotation
+  from {transform: rotate(0deg)}
+  to {transform: rotate(135deg)}
+
+.fa-spinner
+  animation rotation 2.0s infinite ease-in-out
+
+.loading
+  text-align center
+  padding 2px
+  color #007aff
+  top -12px
+  position relative
+  text-shadow 1px 1px 1px #eee
+
+
+//---------------------------------------------------------------
+//  LEFT SIDEBAR
+//---------------------------------------------------------------
+
+//app name in the top of left sidebar menu
+.app-name
+  display inline-block
+  top 0
+  vertical-align top
+  text-shadow 7px 0px 0.5px rgba(7, 126, 255, 0.3)
+  background-color rgb(50, 49, 49)
+  max-height 70px
+  text-align center
+  padding 0
+
+//app version near the app name
+.app-name .app-ver
+    color inherit
+    opacity 0.66
+
+
+//---------------------------------------------------------------
+//  RIGHT SIDEBAR
+//---------------------------------------------------------------
+
+//settings title
+.settings-heading *
+    color #999999
+    text-align center
+    padding 10px 10px 5px 10px
+    margin 0
+
+//settings input and buttons
+.settings-body input, .settings-body button
+  text-align left
+  padding 6px
+  border none
+  line-height normal
+  width auto
+  font-size inherit
+  height 30px
+
+//settings labels
+.settings-body label
+  font-weight inherit
+  padding 6px
+  margin 0
+  text-align left
+  height 30px
+
+//three grouped buttons
+.settings-body .btn-group.justified .btn
+  width:33.3333%

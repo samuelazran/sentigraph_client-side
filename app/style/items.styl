@@ -1,0 +1,61 @@
+// data css stylesheet
+
+//---------------------------------------------------------------
+//  DATE ITEMS (FEED)
+//---------------------------------------------------------------
+
+//set the element width and height to be the same
+square(size)
+  width size
+  height size
+
+//item container
+.items>.item
+  overflow-wrap break-word
+  padding 1px
+  margin-top 7px
+  margin-bottom 7px
+
+//item content
+.item>.panel
+  border-color #ddd
+  height 100%
+  overflow hidden
+  margin 0
+
+//item metadata section
+.items>.item>.panel>.panel-heading
+  padding 1px
+
+.items>.item .meta-data
+  color #999
+
+.item .panel-heading .btn
+  square(50px)
+  border-color #DDDDDD
+
+.item .vote
+  background-color rgba(250,245,240,0.6)
+  position absolute
+  box-shadow 2px -2px 3px #ccd, -1px 4px 3px #ccd
+  z-index 2
+  border-radius 4px
+  display none
+
+.item .select-class.open .vote
+  display initial
+
+.class-name
+  position relative
+  top 14px
+  right 4px
+
+.user-image
+  background-repeat no-repeat
+  background-size 48px
+
+.item .panel-body.text
+  padding 15px
+
+.item .text
+  font-size 16px

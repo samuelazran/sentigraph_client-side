@@ -1,4 +1,4 @@
-<div class="scrollable">
+<div class="scrollable full-height">
     <div class="panel scrollable-content" lr-infinite-scroll="paging" scroll-threshold="300" time-threshold="200">
         <div class="panel-heading">
             <h2 class="panel-title">popular from {{dataParams.source}} about {{dataParams.domain}}</h2>
@@ -13,12 +13,15 @@
                         <div class="panel">
                             <div class="panel-heading">
                                 <div class="pull-left meta-data">
-                                    <a ng-show="item.user" href="https://twitter.com/{{item.user.screen_name}}" target="_blank">
+                                    <span ng-show="item.user">
+                                    <a href="https://twitter.com/{{item.user.screen_name}}" target="_blank">
                                         <span type="button"
                                                 style="background-image: url({{item.user.profile_image_url}});"
-                                                class="btn btn-default btn-sm user-image"></span>
+                                                class="btn btn-default btn-sm user-image"></span></a>
+                                    <a href="https://twitter.com/{{item.user.screen_name}}" target="_blank">
                                         <span ng-bind="item.user.name"></span>
                                     </a>
+                                    </span>
                                     <span ng-bind="item.created_at | timeago"></span>
                                 </div>
 
