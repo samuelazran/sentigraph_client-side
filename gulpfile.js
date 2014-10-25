@@ -60,7 +60,7 @@ gulp.task('browserify', function() {
         // Bundle to a single file
         .pipe(concat('bundle.js'))
         //compress
-        //.pipe(uglify())
+        .pipe(uglify())
         // Output it to our dist folder
         .pipe(gulp.dest('dist/js'));
 });
