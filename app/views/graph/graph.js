@@ -18,19 +18,23 @@ angular.module('myApp.graph', ['ngRoute','googlechart',
     }
 })
 
-.controller('GraphCtrl', ['$scope','dataApi','dataSettings','$log',
-        function($scope, dataApi, dataSettings, $log) {
+.controller('GraphCtrl', ['$scope', 'googleChartApiPromise', 'dataApi','dataModels','$log',
+        function($scope, googleChartApiPromise, dataApi, dataModels, $log) {
 
     $scope.getData = function (params) {
-        dataApi.getGraphData(params).then(function (dataList) {
-            $log.log(dataList);
-            $scope.chartObject.data.rows = dataList;
+        dataApi.getGraphData(params).then(function (data) {
+            $log.log(data);
+            $scope.chartObject.data.rows = [];
+            for (var index in data.objects) {
+                var graphDatum = data.objects[index];
+                $scope.chartObject.data.rows.push(graphDatum.toGoogleChartRow());
+            }
         }, function (err) {
             $log.error(err);
         });
     };
 
-    $scope.feedDateTimeRange = dataSettings.feedDateTimeRange;
+    $scope.feedDateTimeRange = dataModels.feedDateTimeRange;
 
     $scope.dataParams = {
         source: "twitter",
@@ -64,6 +68,14 @@ angular.module('myApp.graph', ['ngRoute','googlechart',
             "title": "Date"
         }
     };
-
+    //promise to draw the graph
+    $scope.loading=true;
+    googleChartApiPromise.then(
+        function (data) {
+            $log.log("chart ready");
+            $scope.loading=false;
+        }, function (err) {
+            $log.error(err);
+    });
 
 }]);

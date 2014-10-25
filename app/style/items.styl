@@ -29,6 +29,14 @@ square(size)
 
 .items>.item .meta-data
   color #999
+  height 50px
+
+.items>.item .meta-data.left-box
+  max-width 50%
+  max-width calc(100% - 180px)
+.items>.item .meta-data.left-box a
+  margin 0 6px 0 6px
+  color currentcolor
 
 .item .panel-heading .btn
   square(50px)
@@ -47,15 +55,19 @@ square(size)
 
 .class-name
   position relative
-  top 14px
   right 4px
 
 .user-image
   background-repeat no-repeat
   background-size 48px
 
-.item .panel-body.text
+.item .panel-body .text
   padding 15px
-
-.item .text
   font-size 16px
+.item .panel-body .media
+  text-align center
+  margin-top 2px
+  margin-bottom 10px
+.item .panel-body .media img
+  max-width 100%
+

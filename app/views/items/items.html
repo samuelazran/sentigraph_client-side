@@ -13,16 +13,21 @@
                         <div class="panel">
                             <div class="panel-heading">
                                 <div class="pull-left meta-data">
-                                    <span ng-show="item.user">
-                                    <a href="https://twitter.com/{{item.user.screen_name}}" target="_blank">
-                                        <span type="button"
-                                                style="background-image: url({{item.user.profile_image_url}});"
-                                                class="btn btn-default btn-sm user-image"></span></a>
-                                    <a href="https://twitter.com/{{item.user.screen_name}}" target="_blank">
+                                    <a ng-show="item.user" href="https://twitter.com/{{item.user.screen_name}}" target="_blank">
+                                            <span type="button"
+                                                    style="background-image: url({{item.user.profile_image_url}});"
+                                                    class="btn btn-default btn-sm user-image"></span></a>
+                                </div>
+                                <div class="pull-left meta-data vertical-centered-flex-box left-box">
+                                    <a ng-show="item.user"
+                                       class="same-line" href="https://twitter.com/{{item.user.screen_name}}" target="_blank">
                                         <span ng-bind="item.user.name"></span>
                                     </a>
-                                    </span>
-                                    <span ng-bind="item.created_at | timeago"></span>
+                                    <a href="https://twitter.com/{{item.user.screen_name}}/status/{{item.external_id}}"
+                                       target="_blank" class="same-line">
+                                        <span ng-bind="item.created_at | timeago"></span>
+                                        <i class="fa fa-external-link-square"></i>
+                                    </a>
                                 </div>
 
                                 <div class="pull-right toggleable-dropdown select-class" active-class="open" id="vote{{item.id}}" toggleable>
@@ -56,22 +61,26 @@
 
                                 </div>
 
-                                <div class="pull-right meta-data class-name">
+                                <div class="pull-right meta-data class-name vertical-centered-flex-box">
                                     <span ng-bind="item.class_value==1 ? 'positive' : item.class_value==-1 ? 'negative' : 'informative' "></span>
                                 </div>
 
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="panel-body text">
-                                <div class="text" ng-bind-html="item.text | linky"></div>
+                            <div class="panel-body">
+                                <div class="text" ng-bind-html="item.html"></div>
+                                <div class="media" ng-show="item.media">
+                                    <div ng-repeat="media in item.media">
+                                        <img ng-src="{{media.type==='photo' ? media.media_url : ''}}"  ng-show="media.type=='photo'" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="loading" ng-show="loading">
-                <i class="fa fa-spinner"></i>
-                loading...
+                <span><i class="fa fa-spinner"></i>loading...</span>
             </div>
         </div>
     </div>

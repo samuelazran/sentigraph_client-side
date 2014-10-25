@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('myApp.data', [
-    'myApp.data.data-settings-factory',
-    'myApp.data.data-service',
-    'myApp.data.graph-datum-factory'
+    'myApp.data.data-models-factory',
+    'myApp.data.graph-datum-factory',
+    'myApp.data.data-service'
 ]);

@@ -4,6 +4,7 @@
 'use strict';
 
 angular.module('myApp.utils', [
+    'myApp.utils.parse-uri-factory',
     'myApp.utils.timeago-filter',
     'myApp.utils.timeago-factory'
 ])

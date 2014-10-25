@@ -23,27 +23,46 @@ a:hover
   white-space nowrap
   display inline-block
 
-//make sure the main scrollable element is full height
-.app.has-navbar-top .app-body>.main>.full-height
-  height calc(100% - 51px)
-  top 51px
+.vertical-centered-flex-box
+  display -ms-flexbox
+  -ms-flex-pack center
+  -ms-flex-align center
+  display -moz-box
+  -moz-box-pack center
+  -moz-box-align center
+  display -webkit-box
+  -webkit-box-pack  center
+  -webkit-box-align center
+  display box
+  box-pack center
+  box-align  center
 
 //spinner for loading items
 @keyframes rotation
   from {transform: rotate(0deg)}
-  to {transform: rotate(135deg)}
+  to {transform: rotate(360deg)}
 
 .fa-spinner
   animation rotation 2.0s infinite ease-in-out
 
 .loading
   text-align center
-  padding 2px
+  margin-bottom 10px
   color #007aff
-  top -12px
+  top 0
   position relative
   text-shadow 1px 1px 1px #eee
+.loading span
+  background-color rgba(255, 255, 255, 0.41)
+  padding 4px
+  border-radius 4px
+.loading span i
+  margin-right 2px
 
+//make sure the main scrollable element is full height
+.app.has-navbar-top .app-body>.main>.full-height
+  height calc(100% - 51px)
+  top 51px
 
 //---------------------------------------------------------------
 //  LEFT SIDEBAR

@@ -10,11 +10,13 @@ angular.module('myApp.items', ['ngRoute','myApp.data','lrInfiniteScroll'])
   });
 }])
 
-.controller('ItemsCtrl', ['$scope','$timeout','dataApi','dataSettings','$log', function($scope, $timeout, dataApi, dataSettings, $log) {
+.controller('ItemsCtrl',
+    ['$scope','$timeout','dataApi','dataModels','$log',
+        function($scope, $timeout, dataApi, dataModels, $log) {
 
     //the data items and filters params
     $scope.data = [];
-    $scope.feedDateTimeRange=dataSettings.feedDateTimeRange;
+    $scope.feedDateTimeRange=dataModels.feedDateTimeRange;
     $scope.dataParams = {
         language: "en",
         source: "twitter",
@@ -69,9 +71,9 @@ angular.module('myApp.items', ['ngRoute','myApp.data','lrInfiniteScroll'])
 
     $scope.vote = function (item, selectedClass) {
         item.class_value=selectedClass;
-        item.gold = true;
         dataApi.updateData(item.id, {class_value:item.class_value}).then(function (updatedItem) {
             $log.log(updatedItem);
+            item.update(updatedItem);
         }, function (err) {
             $log.error(err);
         });

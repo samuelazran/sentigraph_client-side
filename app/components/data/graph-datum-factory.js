@@ -21,7 +21,7 @@
 
 (function () {
 
-    function grpahDatumFactory($log) {
+    function graphDatumFactory($log) {
 
         //super class for data item for the chart
         function BaseGraphDatum() {
@@ -81,5 +81,5 @@
     }
     angular
         .module('myApp.data.graph-datum-factory', [])
-        .factory('graphDatum', ['$log', grpahDatumFactory]);
+        .factory('graphDatumFactory', ['$log', graphDatumFactory]);
 })();

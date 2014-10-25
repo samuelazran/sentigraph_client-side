@@ -11,7 +11,7 @@ var gulp = require('gulp'),
 
 var projectJsFiles = [
     './app/app.js', // element 0 always should be the main app file!
-    './app/components/*.js',
+    './app/components/*/*.js',
     './app/views/graph/graph.js',
     './app/views/items/items.js'
 ];
@@ -60,7 +60,7 @@ gulp.task('browserify', function() {
         // Bundle to a single file
         .pipe(concat('bundle.js'))
         //compress
-        .pipe(uglify())
+        //.pipe(uglify())
         // Output it to our dist folder
         .pipe(gulp.dest('dist/js'));
 });
@@ -89,7 +89,7 @@ gulp.task('stylus', function () {
 
         .pipe(stylus({
             use: nib(),
-            compress: true
+            compress: false
         }))
         .pipe(autoprefixer({
             browsers: [

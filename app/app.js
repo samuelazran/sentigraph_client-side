@@ -7,11 +7,12 @@ require('./bower_components/angular-loading-bar/build/loading-bar.min.js');
 require('./bower_components/mobile-angular-ui/dist/js/mobile-angular-ui.js');
 require('./bower_components/lrInfiniteScroll/lrInfiniteScroll.js');
 require('./components/data/data.js');
-require('./components/data/data-service.js');
-require('./components/data/data-settings-factory.js');
+require('./components/data/data-models-factory.js');
 require('./components/data/graph-datum-factory.js');
+require('./components/data/data-service.js');
 require('./components/graph/ng-google-chart.js');
 require('./components/utils/utils.js');
+require('./components/utils/parse-uri-factory.js');
 require('./components/utils/timeago-factory.js');
 require('./components/utils/timeago-filter.js');
 require('./components/version/version.js');
@@ -22,11 +23,10 @@ require('./views/items/items.js');
 
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
-    'ngRoute',
-    'ngSanitize',
+    'ngRoute', 'ngSanitize',
     'mobile-angular-ui',
     'angular-loading-bar',
-    'myApp.data.data-settings-factory',
+    'myApp.data',
     'myApp.graph',
     'myApp.items',
     'myApp.utils',
@@ -45,15 +45,15 @@ angular.module('myApp', [
 
     }]).
 
-    controller('SettingsCtrl', ['$scope', 'dataSettings', function($scope, dataSettings) {
+    controller('SettingsCtrl', ['$scope', 'dataModels', function($scope, dataModels) {
 
         //set date time range from now to daysFromNow before
         $scope.setFeedDateTimeRangeRelativeToNow = function (daysFromNow) {
-            dataSettings.feedDateTimeRange.toRelativeRange(daysFromNow);
+            dataModels.feedDateTimeRange.toRelativeRange(daysFromNow);
             $scope.feedDateTimeRangeRelativeToNow = daysFromNow;
         };
 
-        $scope.feedDateTimeRange = dataSettings.feedDateTimeRange;
+        $scope.feedDateTimeRange = dataModels.feedDateTimeRange;
         //default feed date time range
         $scope.feedDateTimeRangeRelativeToNow = 7;
 
@@ -61,3 +61,11 @@ angular.module('myApp', [
 
     }])
 ;
+
+
+(function () {
+    var twitterText = require('twitter-text');
+    angular
+    .module('twitterText', [])
+    .factory('twitterText', [function () {return twitterText;}]);
+})();

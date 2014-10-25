@@ -3,60 +3,47 @@
  */
 'use strict';
 
-angular.module('myApp.data.data-service', ['ngResource', 'myApp.data.graph-datum-factory', 'myApp.data.data-settings-factory'])
+angular.module('myApp.data.data-service', ['ngResource', 'myApp.data.data-models-factory'])
 
-    .service('dataApi', ['$resource', 'graphDatum', 'dataSettings', '$log', function($resource, graphDatum, dataSettings, $log) {
-
-        //given dictionary of parameters return query object with filters for get request
-        function paramsToQuery(params) {
-            var query = {q:{filters:[]}};
-            for (var p in params) {
-                if (params.hasOwnProperty(p)) {
-
-                    //special treatment for Range:
-                    if (params[p] instanceof dataSettings.BaseRange) {
-                        query.q.filters.push(dataSettings.FilterFactory(p,">=", params[p].start));
-                        query.q.filters.push(dataSettings.FilterFactory(p,"<=", params[p].end));
-                    }
-
-                    //special treatment for ASC_ORDER_BY and DESC_ORDER_BY keywords:
-                    else if (p==="ASC_ORDER_BY" || p==="DESC_ORDER_BY") {
-                        var direction = (p==="ASC_ORDER_BY") ? "asc" : "desc";
-                        if (!query.q['order_by']) {
-                            query.q['order_by']=[];
-                        }
-                        query.q['order_by'].push(dataSettings.OrderFactory(params[p],direction));
-                    }
-
-                    //special treatment for PAGE keyword:
-                    else if (p==="PAGE") {
-                        if (!query['page']) {
-                            query['page']=null;
-                        }
-                        query['page']=params[p];
-                    }
-
-                    else {
-                        query.q.filters.push(dataSettings.FilterFactory(p,"==", params[p]));
-                    }
-                }
-            }
-            $log.log(query);
-            return query;
-        }
+    .service('dataApi', ['$resource', 'dataModels', '$log', function($resource, dataModels, $log) {
 
         //resource data from the rest api web server
         var $dataResource = $resource('/api/data/:id', {},
-            {query: {method:'GET'}, update: {method:'PATCH', params: { id: "@id" }}}
+            {query: {method:'GET'}, update: {method:'PUT', params: { id: "@id" }}}
         );
         $dataResource.cache=true;
         //resource update method
         this.updateData = function (editedItemId, editedItem) {
-            return $dataResource.update({id:editedItemId}, editedItem).$promise;
+            return $dataResource.update({id:editedItemId}, editedItem).$promise.then(
+                //success
+                function(datum){
+                    //overide the original datum with instance of Datum
+                    //Datum adds readonly attribute for any attribute
+                    return new dataModels.Datum(datum);
+                },
+                //error
+                function( error ){
+                    $log.error(error);
+                }
+            );
         };
         //resource GET method: given resource parameters return promise for data
         this.getData = function (params) {
-            return $dataResource.query(paramsToQuery(params)).$promise;
+            return $dataResource.query(new dataModels.QueryParameters(params).toQuery()).$promise.then(
+                //success
+                function(data){
+                    for (var index in data.objects) {
+                        //overide the original datum with instance of Datum
+                        //Datum adds readonly attribute for any attribute
+                        data.objects[index] = new dataModels.Datum(data.objects[index]);
+                    }
+                    return data;
+                },
+                //error
+                function( error ){
+                    $log.error(error);
+                }
+            );
         };
 
         //resource graph data from the rest api web server
@@ -65,15 +52,15 @@ angular.module('myApp.data.data-service', ['ngResource', 'myApp.data.graph-datum
         );
         //graph method, given resource parameters return graph data
         this.getGraphData = function (params) {
-            return $graphDataResource.query(paramsToQuery(params)).$promise.then(
+            return $graphDataResource.query(new dataModels.QueryParameters(params).toQuery()).$promise.then(
                 //success
                 function(data){
-                    var graphDataArray = [];
-                    angular.forEach(data.objects, function (item) {
-                        item = new graphDatum.DailyGraphDatum(item).toGoogleChartRow();
-                        graphDataArray.push(item);
-                    });
-                    return graphDataArray;
+                    for (var index in data.objects) {
+                        //overide the original datum with instance of GraphDatum
+                        //GraphDatum adds readonly attribute for any attribute
+                        data.objects[index] = new dataModels.DailyGraphDatum(data.objects[index]);
+                    }
+                    return data;
                 },
                 //error
                 function( error ){

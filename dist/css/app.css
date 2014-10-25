@@ -1,2 +1,200 @@
-a{text-decoration:none;color:#0055b3}a:hover{outline:0;color:7 aff;text-decoration:underline}.btn:focus,.btn:active{outline:none}.same-line{white-space:nowrap;display:inline-block}.app.has-navbar-top .app-body>.main>.full-height{height:-webkit-calc(100% - 51px);height:calc(100% - 51px);top:51px}.fa-spinner{-webkit-animation:rotation 2s infinite ease-in-out;-o-animation:rotation 2s infinite ease-in-out;animation:rotation 2s infinite ease-in-out}.loading{text-align:center;padding:2px;color:#007aff;top:-12px;position:relative;text-shadow:1px 1px 1px #eee}.app-name{display:inline-block;top:0;vertical-align:top;text-shadow:7px 0 .5px rgba(7,126,255,0.3);background-color:#323131;max-height:70px;text-align:center;padding:0}.app-name .app-ver{color:inherit;opacity:.66}.settings-heading *{color:#999;text-align:center;padding:10px 10px 5px 10px;margin:0}.settings-body input,.settings-body button{text-align:left;padding:6px;border:none;line-height:normal;width:auto;font-size:inherit;height:30px}.settings-body label{font-weight:inherit;padding:6px;margin:0;text-align:left;height:30px}.settings-body .btn-group.justified .btn{width:33.3333%}@-webkit-keyframes rotation{from{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(135deg);transform:rotate(135deg)}}@-o-keyframes rotation{from{transform:rotate(0)}to{transform:rotate(135deg)}}@keyframes rotation{from{-webkit-transform:rotate(0);-moz-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(135deg);-moz-transform:rotate(135deg);transform:rotate(135deg)}}
-.items>.item{overflow-wrap:break-word;padding:1px;margin-top:7px;margin-bottom:7px}.item>.panel{border-color:#ddd;height:100%;overflow:hidden;margin:0}.items>.item>.panel>.panel-heading{padding:1px}.items>.item .meta-data{color:#999}.item .panel-heading .btn{width:50px;height:50px;border-color:#ddd}.item .vote{background-color:rgba(250,245,240,0.6);position:absolute;-webkit-box-shadow:2px -2px 3px #ccd,-1px 4px 3px #ccd;-moz-box-shadow:2px -2px 3px #ccd,-1px 4px 3px #ccd;box-shadow:2px -2px 3px #ccd,-1px 4px 3px #ccd;z-index:2;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;display:none}.item .select-class.open .vote{display:initial}.class-name{position:relative;top:14px;right:4px}.user-image{background-repeat:no-repeat;-webkit-background-size:48px 48px;-moz-background-size:48px;background-size:48px}.item .panel-body.text{padding:15px}.item .text{font-size:16px}
+a {
+  text-decoration: none;
+  color: #0055b3;
+}
+a:hover {
+  outline: 0;
+  color: 7 aff;
+  text-decoration: underline;
+}
+.btn:focus,
+.btn:active {
+  outline: none;
+}
+.same-line {
+  white-space: nowrap;
+  display: inline-block;
+}
+.vertical-centered-flex-box {
+  display: -ms-flexbox;
+  -ms-flex-pack: center;
+  -ms-flex-align: center;
+  display: -moz-box;
+  -moz-box-pack: center;
+  -moz-box-align: center;
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  display: box;
+  box-pack: center;
+  box-align: center;
+}
+.fa-spinner {
+  -webkit-animation: rotation 2s infinite ease-in-out;
+  -o-animation: rotation 2s infinite ease-in-out;
+  animation: rotation 2s infinite ease-in-out;
+}
+.loading {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #007aff;
+  top: 0;
+  position: relative;
+  text-shadow: 1px 1px 1px #eee;
+}
+.loading span {
+  background-color: rgba(255,255,255,0.41);
+  padding: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+.loading span i {
+  margin-right: 2px;
+}
+.app.has-navbar-top .app-body>.main>.full-height {
+  height: -webkit-calc(100% - 51px);
+  height: calc(100% - 51px);
+  top: 51px;
+}
+.app-name {
+  display: inline-block;
+  top: 0;
+  vertical-align: top;
+  text-shadow: 7px 0px 0.5px rgba(7,126,255,0.3);
+  background-color: #323131;
+  max-height: 70px;
+  text-align: center;
+  padding: 0;
+}
+.app-name .app-ver {
+  color: inherit;
+  opacity: 0.66;
+}
+.settings-heading * {
+  color: #999;
+  text-align: center;
+  padding: 10px 10px 5px 10px;
+  margin: 0;
+}
+.settings-body input,
+.settings-body button {
+  text-align: left;
+  padding: 6px;
+  border: none;
+  line-height: normal;
+  width: auto;
+  font-size: inherit;
+  height: 30px;
+}
+.settings-body label {
+  font-weight: inherit;
+  padding: 6px;
+  margin: 0;
+  text-align: left;
+  height: 30px;
+}
+.settings-body .btn-group.justified .btn {
+  width: 33.3333%;
+}
+@-webkit-keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.items>.item {
+  overflow-wrap: break-word;
+  padding: 1px;
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+.item>.panel {
+  border-color: #ddd;
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+}
+.items>.item>.panel>.panel-heading {
+  padding: 1px;
+}
+.items>.item .meta-data {
+  color: #999;
+  height: 50px;
+}
+.items>.item .meta-data.left-box {
+  max-width: 50%;
+  max-width: -webkit-calc(100% - 180px);
+  max-width: calc(100% - 180px);
+}
+.items>.item .meta-data.left-box a {
+  margin: 0 6px 0 6px;
+  color: currentcolor;
+}
+.item .panel-heading .btn {
+  width: 50px;
+  height: 50px;
+  border-color: #ddd;
+}
+.item .vote {
+  background-color: rgba(250,245,240,0.6);
+  position: absolute;
+  -webkit-box-shadow: 2px -2px 3px #ccd, -1px 4px 3px #ccd;
+  -moz-box-shadow: 2px -2px 3px #ccd, -1px 4px 3px #ccd;
+  box-shadow: 2px -2px 3px #ccd, -1px 4px 3px #ccd;
+  z-index: 2;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  display: none;
+}
+.item .select-class.open .vote {
+  display: initial;
+}
+.class-name {
+  position: relative;
+  right: 4px;
+}
+.user-image {
+  background-repeat: no-repeat;
+  -webkit-background-size: 48px 48px;
+  -moz-background-size: 48px;
+  background-size: 48px;
+}
+.item .panel-body .text {
+  padding: 15px;
+  font-size: 16px;
+}
+.item .panel-body .media {
+  text-align: center;
+  margin-top: 2px;
+  margin-bottom: 10px;
+}
+.item .panel-body .media img {
+  max-width: 100%;
+}
