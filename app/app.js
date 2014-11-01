@@ -19,6 +19,8 @@ require('./components/version/version.js');
 require('./components/version/interpolate-filter.js');
 require('./views/graph/graph.js');
 require('./views/items/items.js');
+require('./views/overview/overview.js');
+require('./views/about/about.js');
 
 
 // Declare app level module which depends on views, and components
@@ -26,9 +28,12 @@ angular.module('myApp', [
     'ngRoute', 'ngSanitize',
     'mobile-angular-ui',
     'angular-loading-bar',
+    'lrInfiniteScroll',
     'myApp.data',
     'myApp.graph',
     'myApp.items',
+    'myApp.overview',
+    'myApp.about',
     'myApp.utils',
     'myApp.version'
 ])
@@ -37,10 +42,15 @@ angular.module('myApp', [
       loadingBar.includeSpinner=false;
     }]).
 
-    controller('MainCtrl', ['$scope', '$location', function($scope, $location) {
+    controller('MainCtrl', ['$scope', '$location', 'dataModels', function($scope, $location, dataModels) {
 
         $scope.isActive = function(route) {
             return route === $location.path();
+        };
+
+        $scope.paging = function () {
+            //run general paging method
+            dataModels.paging();
         };
 
     }]).

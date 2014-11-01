@@ -1,5 +1,5 @@
-<div class="scrollable full-height">
-    <div class="panel scrollable-content" lr-infinite-scroll="paging" scroll-threshold="300" time-threshold="200">
+<div class="full-height">
+    <div class="panel">
         <div class="panel-heading">
             <h2 class="panel-title">popular from {{dataParams.source}} about {{dataParams.domain}}</h2>
         </div>
@@ -68,7 +68,9 @@
                                 <div class="clearfix"></div>
                             </div>
                             <div class="panel-body">
-                                <div class="text" ng-bind-html="item.html"></div>
+                                <div
+                                        post-source="{{item.source}}"
+                                        class="text" ng-bind-html="item.html"></div>
                                 <div class="media" ng-show="item.media">
                                     <div ng-repeat="media in item.media">
                                         <img ng-src="{{media.type==='photo' ? media.media_url : ''}}"  ng-show="media.type=='photo'" />

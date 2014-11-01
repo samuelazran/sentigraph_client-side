@@ -1,3 +1,82 @@
+html,
+body,
+.app-body,
+.main {
+  width: 100%;
+  height: 100%;
+}
+body {
+  padding-top: 53px;
+}
+.sidebar {
+  margin-top: 53px;
+}
+body,
+.app {
+  overflow: auto;
+}
+.app {
+  background-color: #777879;
+}
+.full-height {
+  height: 100%;
+}
+.navbar-app {
+  top: 0;
+  border-bottom-width: 1px;
+  border-color: rgba(192,192,192,0.5);
+  -webkit-box-shadow: 0 2px 2px rgba(128,128,128,0.4);
+  -moz-box-shadow: 0 2px 2px rgba(128,128,128,0.4);
+  box-shadow: 0 2px 2px rgba(128,128,128,0.4);
+}
+.navbar-brand {
+  padding: 0;
+  height: auto;
+}
+.main,
+.app-body {
+  overflow: visible;
+}
+.link-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 50px;
+  white-space: nowrap;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  height: 16px;
+}
+.app-body {
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (max-width: 8192px) {
+  .app-body {
+    width: 40%;
+  }
+}
+@media (max-width: 4096px) {
+  .app-body {
+    width: 50%;
+  }
+}
+@media (max-width: 2048px) {
+  .app-body {
+    width: 66.66%;
+  }
+}
+@media (max-width: 1460px) {
+  .app-body {
+    width: 840px;
+  }
+}
+@media (max-width: 1120px) {
+  .app-body {
+    top: 0px;
+    width: auto;
+  }
+}
 a {
   text-decoration: none;
   color: #0055b3;
@@ -52,20 +131,26 @@ a:hover {
 .loading span i {
   margin-right: 2px;
 }
-.app.has-navbar-top .app-body>.main>.full-height {
-  height: -webkit-calc(100% - 51px);
-  height: calc(100% - 51px);
-  top: 51px;
+.has-navbar-top .app-body {
+  padding-top: 0;
+}
+.panel-title {
+  padding: 6px 0 6px 0;
+}
+h3.panel-title {
+  font-size: 18px;
 }
 .app-name {
+  width: 310px;
   display: inline-block;
   top: 0;
   vertical-align: top;
-  text-shadow: 7px 0px 0.5px rgba(7,126,255,0.3);
-  background-color: #323131;
+  text-shadow: 7px 0px 0.5px rgba(7,126,255,0.22);
+  color: #000080;
+  font-weight: 800;
   max-height: 70px;
-  text-align: center;
-  padding: 0;
+  line-height: 100%;
+  padding: 14px;
 }
 .app-name .app-ver {
   color: inherit;
@@ -78,21 +163,22 @@ a:hover {
   margin: 0;
 }
 .settings-body input,
+.settings-body select,
 .settings-body button {
+  margin-right: 20px;
   text-align: left;
-  padding: 6px;
-  border: none;
   line-height: normal;
   width: auto;
   font-size: inherit;
-  height: 30px;
+  display: inline-block;
+  cursor: pointer;
 }
 .settings-body label {
   font-weight: inherit;
-  padding: 6px;
+  padding: 2px;
   margin: 0;
   text-align: left;
-  height: 30px;
+  width: 60px;
 }
 .settings-body .btn-group.justified .btn {
   width: 33.3333%;
@@ -153,7 +239,7 @@ a:hover {
   max-width: calc(100% - 180px);
 }
 .items>.item .meta-data.left-box a {
-  margin: 0 6px 0 6px;
+  margin: 0 0 0 6px;
   color: currentcolor;
 }
 .item .panel-heading .btn {

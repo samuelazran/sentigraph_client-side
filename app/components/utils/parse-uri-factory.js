@@ -1,3 +1,4 @@
+'use strict';
 // parseUri 1.2.2
 // (c) Steven Levithan <stevenlevithan.com>
 // MIT License
@@ -17,7 +18,7 @@
             });
 
             return uri;
-        };
+        }
 
         parseUri.options = {
             strictMode: false,
@@ -33,8 +34,9 @@
         };
         return {
             parseUri: parseUri
-        }
+        };
     }
+
     angular
         .module('myApp.utils.parse-uri-factory', [])
         .factory('parseUriFactory', [parseUriFactory]);

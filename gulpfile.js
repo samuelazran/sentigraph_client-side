@@ -13,7 +13,9 @@ var projectJsFiles = [
     './app/app.js', // element 0 always should be the main app file!
     './app/components/*/*.js',
     './app/views/graph/graph.js',
-    './app/views/items/items.js'
+    './app/views/items/items.js',
+    './app/views/overview/overview.js',
+    './app/views/about/about.js'
 ];
 
 var projectMainView = 'app/index.html';
@@ -73,7 +75,7 @@ gulp.task('views', function() {
         .pipe(gulp.dest('dist/'));
 
     // Any other view files from app/views
-    gulp.src(projectViewsFiles)
+    gulp.src(projectViewsFiles).on('error', function (e) {console.err(e);})
         // Will be put in the dist/views folder
         .pipe(gulp.dest('dist/views/'));
 

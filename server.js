@@ -699,5 +699,5 @@ var server = httpServer.createServer({
 		before: [before],
         headers: { }
       });
-console.log("Starting up http-server, serving ./ on port: 8000");
+console.log("Starting up http-server, serving ./ on port: 5000");
 server.listen(5000);

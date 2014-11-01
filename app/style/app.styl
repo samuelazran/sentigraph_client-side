@@ -4,6 +4,81 @@
 //  COMMON
 //---------------------------------------------------------------
 
+//media queries for desktops
+
+html, body, .app-body, .main
+  width 100%
+  height 100%
+
+body
+  padding-top 53px
+.sidebar
+  margin-top 53px
+
+body, .app
+  overflow auto
+
+.app
+  //background-image url(images/noisy-texture-100x100.png)
+  background-color #777879
+
+.full-height
+  height 100%
+
+.navbar-app
+  top  0
+  border-bottom-width 1px
+  border-color rgba(192, 192, 192, 0.5)
+  box-shadow 0 2px 2px rgba(128, 128, 128, 0.4)
+
+.navbar-brand
+  padding 0
+  height auto
+
+.main, .app-body
+  overflow visible
+.link-overflow
+  overflow: hidden
+  text-overflow: ellipsis
+  max-width: 50px
+  white-space: nowrap
+  display: inline-block
+  padding: 0
+  margin: 0
+  height: 16px
+
+.app-body
+  margin-right auto
+  margin-left auto
+//8K res
+@media (max-width: 8192px) {
+  .app-body {
+    width:40%
+  }
+}
+//4K res
+@media (max-width: 4096px) {
+  .app-body {
+    width:50%
+  }
+}
+//full HD res
+@media (max-width: 2048px) {
+  .app-body {
+    width:66.66%
+  }
+}
+// HD
+@media (max-width: 1460px)
+  .app-body
+    width 840px
+// < HD
+@media (max-width: 1120px)
+  .app-body
+    top 0px
+    width auto
+
+
 //links
 a
   text-decoration none
@@ -60,9 +135,16 @@ a:hover
   margin-right 2px
 
 //make sure the main scrollable element is full height
-.app.has-navbar-top .app-body>.main>.full-height
-  height calc(100% - 51px)
-  top 51px
+.has-navbar-top .app-body
+  padding-top 0
+
+
+.panel-title {
+  padding 6px 0 6px 0
+}
+h3.panel-title {
+  font-size: 18px;
+}
 
 //---------------------------------------------------------------
 //  LEFT SIDEBAR
@@ -70,14 +152,16 @@ a:hover
 
 //app name in the top of left sidebar menu
 .app-name
+  width 310px
   display inline-block
   top 0
   vertical-align top
-  text-shadow 7px 0px 0.5px rgba(7, 126, 255, 0.3)
-  background-color rgb(50, 49, 49)
+  text-shadow 7px 0px 0.5px rgba(7, 126, 255, 0.22)
+  color navy
+  font-weight  800
   max-height 70px
-  text-align center
-  padding 0
+  line-height 100%
+  padding 14px
 
 //app version near the app name
 .app-name .app-ver
@@ -97,22 +181,23 @@ a:hover
     margin 0
 
 //settings input and buttons
-.settings-body input, .settings-body button
+.settings-body input, .settings-body select, .settings-body button
+  margin-right 20px
   text-align left
-  padding 6px
-  border none
   line-height normal
   width auto
   font-size inherit
-  height 30px
+  display inline-block
+  cursor pointer
+
 
 //settings labels
 .settings-body label
   font-weight inherit
-  padding 6px
+  padding 2px
   margin 0
   text-align left
-  height 30px
+  width 60px
 
 //three grouped buttons
 .settings-body .btn-group.justified .btn

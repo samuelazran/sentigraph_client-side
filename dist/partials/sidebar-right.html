@@ -13,37 +13,24 @@
                 </div>
 
                 <div class="list-group-item">
-
                     <div class="same-line">
-                        <label class="" toggle target="domainDropdown">domain: </label>
-                        <div class="btn-group pull-right toggleable-dropdown" active-class="open" id="domainDropdown" toggleable>
-                            <button type="button"
-                                    class="btn btn-default dropdown-toggle" toggle
-                                    target="domainDropdown">
-                                <i class="fa fa-bitcoin"></i> Bitcoin <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu" toggle="off" bubble target="domainDropdown">
-                                <li><a href><i class="fa fa-bitcoin"></i> Bitcoin</a></li>
-                                <li class="divider"></li>
-                                <li><a href>more coming soon</a></li>
-                            </ul>
-                        </div>
+                        <label class="control-label" for="domain">domain: </label>
+                        <select id="domain" class="form-control">
+                            <optgroup label="Crypto-Currency">
+                                <option>Bitcoin</option>
+                            </optgroup>
+                            <optgroup label="more comming soon"></optgroup>
+                        </select>
                     </div>
 
                     <div class="same-line">
-                        <label class="" toggle target="sourceDropdown">source: </label>
-                        <div class="btn-group pull-right toggleable-dropdown" active-class="open" id="sourceDropdown" toggleable>
-                            <button type="button"
-                                    class="btn btn-default dropdown-toggle" toggle
-                                    target="sourceDropdown">
-                                <i class="fa fa-twitter"></i> Twitter <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu" toggle="off" bubble target="sourceDropdown">
-                                <li><a href><i class="fa fa-twitter"></i> Twitter</a></li>
-                                <li class="divider"></li>
-                                <li><a href>more coming soon</a></li>
-                            </ul>
-                        </div>
+                        <label class="control-label" for="source">source: </label>
+                        <select id="source" class="form-control">
+                            <optgroup label="Social Media">
+                                <option>Twitter</option>
+                            </optgroup>
+                            <optgroup label="more comming soon"></optgroup>
+                        </select>
                     </div>
                 </div>
 
@@ -53,13 +40,13 @@
                 <div class="list-group-item">
                     <div>
                         <span class="same-line">
-                            <label class="" for="feedDateStart">since: </label>
-                            <input class="" id="feedDateStart" type="date"
+                            <label class="control-label" for="feedDateStart">since: </label>
+                            <input  class="form-control" id="feedDateStart" type="date"
                                    ng-model="feedDateTimeRange.start" />
                         </span>
                         <span class="same-line">
-                            <label class="" for="feedDateEnd">until: </label>
-                            <input class="" id="feedDateEnd" type="date"
+                            <label class="control-label" for="feedDateEnd">until: </label>
+                            <input class="form-control" id="feedDateEnd" type="date"
                                    ng-model="feedDateTimeRange.end" />
                         </span>
                     </div>

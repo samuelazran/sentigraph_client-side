@@ -217,6 +217,15 @@
             return uri.host;
         }
 
+        //general paging method, can be set and access acros the application
+        function paging(method) {
+            if (method) {
+                this.method=method;
+            } else if (this.method) {
+                this.method();
+            }
+        }
+
         return {
             BaseRange: BaseRange,
             DateTimeRange: DateTimeRange,
@@ -226,7 +235,8 @@
             QueryParameters: QueryParameters,
             Datum: Datum,
             BaseGraphDatum: graphDatumFactory.BaseGraphDatum,
-            DailyGraphDatum: graphDatumFactory.DailyGraphDatum
+            DailyGraphDatum: graphDatumFactory.DailyGraphDatum,
+            paging: paging
         };
     }
 

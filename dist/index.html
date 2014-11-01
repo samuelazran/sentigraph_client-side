@@ -25,31 +25,34 @@
 <div ng-include="'partials/sidebar.html'" class="sidebar sidebar-left" toggleable parent-active-class="sidebar-left-in" id="mainSidebar"></div>
 <div ng-include="'partials/sidebar-right.html'" class="sidebar sidebar-right" toggleable parent-active-class="sidebar-right-in" id="rightSidebar"></div>
 
-<div class="app">
+<!-- Navbars -->
+<div class="navbar navbar-app navbar-absolute-top">
 
-    <!-- Navbars -->
-    <div class="navbar navbar-app navbar-absolute-top">
+    <div class="navbar-brand navbar-brand-center" yield-to="title">
+        <h1 class="app-name">
+            <i class="fa fa-lg fa-line-chart"></i>
+            Sentigraph
+            <small class="app-ver">{{ 'v%VERSION%' | interpolate }}</small>
+        </h1>
+    </div>
 
-        <div class="navbar-brand navbar-brand-center" yield-to="title">
-            <span>Sentigraph {{ 'v%VERSION%' | interpolate }}</span>
-        </div>
-
-        <div class="btn-group pull-left">
-            <div ng-click="toggle('mainSidebar')" class="btn btn-navbar sidebar-toggle">
-                <i class="fa fa-bars"></i>
-            </div>
-        </div>
-
-        <div class="btn-group pull-right" yield-to="navbarAction">
-            <div class="btn btn-navbar" ng-click="toggle('rightSidebar')">
-                <i class="fa fa-gear"></i>
-            </div>
+    <div class="btn-group pull-left">
+        <div ng-click="toggle('mainSidebar')" class="btn btn-navbar sidebar-toggle">
+            <i class="fa fa-bars"></i>
         </div>
     </div>
 
+    <div class="btn-group pull-right" yield-to="navbarAction">
+        <div class="btn btn-navbar" ng-click="toggle('rightSidebar')">
+            <i class="fa fa-gear"></i>
+        </div>
+    </div>
+</div>
 
-    <div class="app-body" >
-        <div class="main" ng-view></div>
+<div class="app" lr-infinite-scroll="paging" scroll-threshold="300" time-threshold="200">
+
+    <div class="app-body">
+        <div class="main" ng-view ></div>
     </div>
 </div>
 

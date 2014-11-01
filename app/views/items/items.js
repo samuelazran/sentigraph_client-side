@@ -1,7 +1,7 @@
 'use strict';
 
 
-angular.module('myApp.items', ['ngRoute','myApp.data','lrInfiniteScroll'])
+angular.module('myApp.items', ['ngRoute','myApp.data'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/items', {
@@ -35,7 +35,6 @@ angular.module('myApp.items', ['ngRoute','myApp.data','lrInfiniteScroll'])
         //get promise to get data in 100 ms
         getDataTimeoutPromise=$timeout(function () {
             dataApi.getData(params).then(function (data) {
-                $log.log(data);
                 $scope.totalPages = data.total_pages;
                 if (data.page===1) {
                     $scope.data = [];
@@ -57,6 +56,8 @@ angular.module('myApp.items', ['ngRoute','myApp.data','lrInfiniteScroll'])
         }
         $scope.dataParams.PAGE++;
     };
+    //set general paging method to be this paging method
+    dataModels.paging($scope.paging);
 
     //$watch $scope.dataParams deeply for changes
     $scope.$watch("dataParams", function(newValues, oldValues, scope) {
@@ -72,11 +73,37 @@ angular.module('myApp.items', ['ngRoute','myApp.data','lrInfiniteScroll'])
     $scope.vote = function (item, selectedClass) {
         item.class_value=selectedClass;
         dataApi.updateData(item.id, {class_value:item.class_value}).then(function (updatedItem) {
-            $log.log(updatedItem);
             item.update(updatedItem);
         }, function (err) {
             $log.error(err);
         });
     };
 
-}]);
+}])
+    .directive('postSource', ['$log',function($log) {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attrs) {
+                var postSource=attrs.postSource;
+                if (postSource==="twitter") {
+                    angular.element(element).ready(function () {
+                        angular.forEach(angular.element(element).find('a'), function (a) {
+                            if (a.getAttribute('class')===null) {
+                                a.setAttribute('target','_blank');
+                                angular.forEach(angular.element(a).find('span'), function (span) {
+                                    if (span.getAttribute('class')!=='js-display-url') {
+                                        if (span.innerText[0]==='/') {
+                                            span.setAttribute('class', 'link-overflow');
+                                        } else {
+                                            span.style.display='none';
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    });
+                }
+            }
+        };
+    }])
+;
